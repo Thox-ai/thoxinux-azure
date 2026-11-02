@@ -1,0 +1,82 @@
+{
+  "boot_acceptance": true,
+  "boot_checks": [
+    {
+      "command": "status",
+      "passed": true,
+      "response_sha256": "657a5bd3f80a67171cf36d1bc2084f92f017ec4dcd4f431a189f18047e2c3f4f"
+    },
+    {
+      "command": "components",
+      "passed": true,
+      "response_sha256": "42176c42d2657449deb2e43ac50a94b396cbddbdc15713a85726b9a88a1d519f"
+    },
+    {
+      "command": "domain list",
+      "passed": true,
+      "response_sha256": "9f0ac4ddfcbff891f6176fd8bec798de5a6e15464bd18be878a63b40511189bd"
+    },
+    {
+      "command": "help",
+      "passed": true,
+      "response_sha256": "6da91a5b2ea7295f2415b13f52a58ee91c74d0b0a10b0bcc528cbc4575c9d9f2"
+    }
+  ],
+  "clean_shutdown": true,
+  "commands": [
+    {
+      "command": "domain status azureprobe",
+      "expected": "State:       configured",
+      "passed": true,
+      "response": "Name:        azureprobe\nState:       configured\nPersonality: linux\nInit:        /sbin/init\nCPU:         1\nMemory MiB:  128\nAutostart:   false\nNetworks:    host(shared)      \nImage:       embedded://minimal-system-v0\nConsole:     detached\nRootfs:      pending\nExecution:   inactive"
+    },
+    {
+      "command": "domain start azureprobe",
+      "expected": "azureprobe: running (detached)",
+      "passed": true,
+      "response": "azureprobe: running (detached)"
+    },
+    {
+      "command": "domain status azureprobe",
+      "expected": "State:       running",
+      "passed": true,
+      "response": "Name:        azureprobe\nState:       running\nPersonality: linux\nInit:        /sbin/init\nCPU:         1\nMemory MiB:  128\nAutostart:   false\nNetworks:    host(shared)      \nImage:       embedded://minimal-system-v0\nConsole:     detached\nRootfs:      pending\nExecution:   active"
+    },
+    {
+      "command": "domain stop azureprobe",
+      "expected": "azureprobe: stopped",
+      "passed": true,
+      "response": "azureprobe: stopped"
+    },
+    {
+      "command": "domain status azureprobe",
+      "expected": "State:       stopped",
+      "passed": true,
+      "response": "Name:        azureprobe\nState:       stopped\nPersonality: linux\nInit:        /sbin/init\nCPU:         1\nMemory MiB:  128\nAutostart:   false\nNetworks:    host(shared)      \nImage:       embedded://minimal-system-v0\nConsole:     detached\nRootfs:      pending\nExecution:   inactive"
+    }
+  ],
+  "efi_sha256": "1bc1c7af33470edc009fa5756d3fe6063573660e07e157d19397afc680a7bb89",
+  "ended_at": "2026-11-02T04:38:19+00:00",
+  "label": "recovered",
+  "release": "v0.9.1",
+  "result": "passed",
+  "scope": "local_qemu_tcg_only",
+  "started_at": "2026-11-02T04:38:12+00:00",
+  "supervisor_argv": [
+    "/usr/bin/python3",
+    "/tmp/thoxinux-portable-check-def34ao9/payload/guest_service.py",
+    "--pins",
+    "/tmp/thoxinux-portable-check-def34ao9/payload/pins.json",
+    "--launcher",
+    "/tmp/thoxinux-portable-check-def34ao9/payload/run-vm.sh",
+    "--artifacts",
+    "/tmp/thoxinux-verify-5l10ps1z/artifacts",
+    "--state",
+    "/tmp/thoxinux-verify-5l10ps1z/state",
+    "--logs",
+    "/tmp/thoxinux-verify-5l10ps1z/logs",
+    "--socket-path",
+    "/tmp/thoxinux-verify-5l10ps1z/run/control.sock"
+  ],
+  "uid": 65534
+}

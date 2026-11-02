@@ -1,0 +1,45 @@
+[Unit]
+Description=ThoxInux kernel research guest (QEMU TCG)
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=thoxinux
+Group=thoxinux
+WorkingDirectory=/var/lib/thoxinux
+ExecStart=/usr/bin/python3 /opt/thoxinux/guest_service.py
+Environment=QEMU_ACCEL=tcg
+Environment=GINUX_MEMORY=2G
+Environment=PYTHONDONTWRITEBYTECODE=1
+RuntimeDirectory=thoxinux
+RuntimeDirectoryMode=0700
+StateDirectory=thoxinux
+StateDirectoryMode=0750
+LogsDirectory=thoxinux
+LogsDirectoryMode=0750
+UMask=0077
+Restart=on-failure
+RestartSec=15
+TimeoutStopSec=45
+KillMode=mixed
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
+ReadWritePaths=/var/lib/thoxinux /var/log/thoxinux /run/thoxinux
+MemoryMax=5G
+TasksMax=64
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

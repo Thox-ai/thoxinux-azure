@@ -1,0 +1,18 @@
+{
+  "result": "passed",
+  "scope": "local_qemu_tcg_only",
+  "release": "v0.9.1",
+  "efi_sha256": "1bc1c7af33470edc009fa5756d3fe6063573660e07e157d19397afc680a7bb89",
+  "qemu": "8.2.2 Ubuntu package 1:8.2.2+ds-0ubuntu1.18",
+  "profile": "Q35/OVMF, 1 vCPU, 2 GiB, TCG, 48-bit IOMMU",
+  "lifecycle_commands_passed": 22,
+  "controller_acceptance_checks_passed": 8,
+  "boots_passed": 2,
+  "clean_shutdowns_passed": 2,
+  "azure_deployed": false,
+  "production_cli_path_tested": false,
+  "final_guest_state": "stopped",
+  "supervisor_sha256": "e29e962da71d4b4b4f03b8677ee878eb2f736c7164a3c29acb6b662411142996",
+  "launcher_sha256": "c7694116061f7ea5b3d9f4eda416d9eca1410d7568d6560edf2e4617708e91c8",
+  "log_sha256": "9cd70a1d86acd20cf9982199b982b648818c50368320738af3a9830acdc21807"
+}

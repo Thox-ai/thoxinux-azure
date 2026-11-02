@@ -1,0 +1,74 @@
+name: Verify deployment and kernel
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/verify.yml
+      - payload/**
+      - tests/**
+      - tools/**
+      - README.md
+      - .gitattributes
+      - portal/**
+      - deploy.py
+      - azuredeploy.json
+      - cloud-init.yaml
+      - build_cloud_init.py
+  pull_request:
+    paths:
+      - .github/workflows/verify.yml
+      - payload/**
+      - tests/**
+      - tools/**
+      - README.md
+      - .gitattributes
+      - portal/**
+      - deploy.py
+      - azuredeploy.json
+      - cloud-init.yaml
+      - build_cloud_init.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - name: Check out reviewed source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Check unit guards and generated deployment files
+        run: |
+          python3 -B -m unittest discover -s tests -v
+          python3 build_cloud_init.py --check
+          python3 portal/build_portal.py --check
+
+      - name: Install local emulator packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends qemu-system-x86 ovmf util-linux
+
+      - name: Boot real released kernel and verify lifecycle
+        id: kernel
+        run: python3 tools/verify_kernel.py --output "$RUNNER_TEMP/thoxinux-kernel-proof"
+
+      - name: Preserve actual local kernel evidence
+        if: ${{ always() && steps.kernel.outcome != 'skipped' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: thoxinux-kernel-proof-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/thoxinux-kernel-proof/
+          retention-days: 30
+          if-no-files-found: error

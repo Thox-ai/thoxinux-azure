@@ -1,0 +1,29 @@
+{
+  "azure_deployed": false,
+  "boots_passed": 2,
+  "claim_limits": [
+    "Real local kernel/controller and embedded-domain lifecycle only",
+    "Rootfs pending does not establish ready Rocky Linux or systemd userspace",
+    "No native Hyper-V, Azure deployment, production service, graphical desktop or MeshStack acceptance"
+  ],
+  "clean_shutdowns_passed": 2,
+  "controller_acceptance_checks_passed": 8,
+  "efi_sha256": "1bc1c7af33470edc009fa5756d3fe6063573660e07e157d19397afc680a7bb89",
+  "ended_at": "2026-11-02T04:38:19+00:00",
+  "final_guest_state": "stopped",
+  "harness_sha256": "3825e4808a406c243ecbd8b3b2f85eefa0956edc34a84c0cb5720ef83e8fee71",
+  "launcher_sha256": "c7694116061f7ea5b3d9f4eda416d9eca1410d7568d6560edf2e4617708e91c8",
+  "lifecycle_commands_passed": 22,
+  "log_sha256": "8e6fa0f40e9b02809132df99ca0363e43fc0aba83e7dbc41020220c3d5256ba9",
+  "production_cli_path_tested": false,
+  "profile": "Q35/OVMF, 1 vCPU, 2 GiB, TCG, 48-bit IOMMU",
+  "qemu": "QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)",
+  "release": "v0.9.1",
+  "result": "passed",
+  "scope": "local_qemu_tcg_only",
+  "source_commit": "fbad5952f20281ef6ad7eaefc1f54f7db4c0c6e9",
+  "started_at": "2026-11-02T04:37:58+00:00",
+  "supervisor_sha256": "e29e962da71d4b4b4f03b8677ee878eb2f736c7164a3c29acb6b662411142996",
+  "systemd_cloud_init_tested": false,
+  "uid": 65534
+}

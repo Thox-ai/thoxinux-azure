@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "release": "v0.9.1",
+  "repository": "Thox-ai/thoxinux",
+  "source_commit": "fbad5952f20281ef6ad7eaefc1f54f7db4c0c6e9",
+  "upstream_commit": "36503bda2d87465765e1b94e65f9d100f27ed5be",
+  "efi_sha256": "1bc1c7af33470edc009fa5756d3fe6063573660e07e157d19397afc680a7bb89",
+  "expected_banner": "ThoxInux 0.9.0 | ThoxOS Core | THOX.ai LLC",
+  "assets": {
+    "build-receipt.json": {
+      "url": "https://github.com/Thox-ai/thoxinux/releases/download/v0.9.1/build-receipt.json",
+      "sha256": "5b6f2eb2aff311db9924d7d3f6da4d2802b6f04b01d72d73a3f5784340df384c",
+      "size_bytes": 1492
+    },
+    "GINUX.EFI": {
+      "url": "https://github.com/Thox-ai/thoxinux/releases/download/v0.9.1/GINUX.EFI",
+      "sha256": "1bc1c7af33470edc009fa5756d3fe6063573660e07e157d19397afc680a7bb89",
+      "size_bytes": 12507648
+    },
+    "SHA256SUMS": {
+      "url": "https://github.com/Thox-ai/thoxinux/releases/download/v0.9.1/SHA256SUMS",
+      "sha256": "85dce449380f5d6f23e1ea030bcff7b67c4305145a1ad39b6d99b4d9c8307d70",
+      "size_bytes": 320
+    }
+  },
+  "bundled_files": {
+    "GINUX_LICENSE": {
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357
+    },
+    "GINUX_NOTICE": {
+      "sha256": "65efae7eeef0e462670e5e80a2a122f2f5910559f2c73e9e88c53d45414f1bcf",
+      "size_bytes": 105
+    },
+    "run-vm.sh": {
+      "sha256": "c7694116061f7ea5b3d9f4eda416d9eca1410d7568d6560edf2e4617708e91c8",
+      "size_bytes": 6652
+    }
+  }
+}

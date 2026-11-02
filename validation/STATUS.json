@@ -1,0 +1,49 @@
+{
+  "task": "Prepare a new GitHub repository with end-to-end Azure resources and a Deploy to Azure button for ThoxInux",
+  "prepared_at": "2026-11-02T04:45:53.629787+00:00",
+  "state": "source_prepared_local_kernel_verified_azure_acceptance_pending",
+  "azure_vm_created": false,
+  "azure_subscription_selected": false,
+  "azure_arm_validation": "not_run",
+  "azure_what_if": "not_run",
+  "azure_systemd_cloud_init_acceptance": "not_run",
+  "production_cli_path_tested": false,
+  "guest_release": "v0.9.1",
+  "guest_efi_sha256": "1bc1c7af33470edc009fa5756d3fe6063573660e07e157d19397afc680a7bb89",
+  "local_kernel_boots_passed": 2,
+  "local_lifecycle_commands_passed": 22,
+  "local_controller_checks_passed": 8,
+  "local_clean_shutdowns_passed": 2,
+  "local_test_guest_final_state": "stopped",
+  "unit_tests": {
+    "scope": "local_unit_transport_packaging_and_publication_guard_tests_not_azure",
+    "executed_utc": "2026-11-02T04:44:04.367229+00:00",
+    "tests_run": 93,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 93,
+    "success": true
+  },
+  "remaining_action": "Deploy into a new dedicated resource group and record actual Azure cloud-init, extension and current guest acceptance.",
+  "claim_limits": [
+    "Local QEMU boot and controller/domain lifecycle evidence only.",
+    "Domain rootfs remains pending; no Rocky Linux or systemd userspace readiness claim.",
+    "No native Hyper-V, physical hardware, graphical desktop, or full THOX application-stack acceptance."
+  ],
+  "portable_verifier": {
+    "result": "passed",
+    "evidence": "portable-qemu/summary.json",
+    "boots": 2,
+    "controller_checks": 8,
+    "lifecycle_commands": 22,
+    "clean_shutdowns": 2,
+    "test_guest_final_state": "stopped",
+    "scope": "local_qemu_tcg_only"
+  },
+  "github_actions": "not_run",
+  "formal_github_release": "not_published",
+  "status_is_prepublication_snapshot": true,
+  "github_repository_published": false,
+  "github_target": "Thox-ai/thoxinux-azure"
+}

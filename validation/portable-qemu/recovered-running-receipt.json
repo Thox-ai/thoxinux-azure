@@ -1,0 +1,51 @@
+{
+  "accelerator": "tcg",
+  "accepted": true,
+  "accepted_at": "2026-11-02T04:38:16+00:00",
+  "checks": [
+    {
+      "command": "status",
+      "passed": true,
+      "response_sha256": "657a5bd3f80a67171cf36d1bc2084f92f017ec4dcd4f431a189f18047e2c3f4f"
+    },
+    {
+      "command": "components",
+      "passed": true,
+      "response_sha256": "42176c42d2657449deb2e43ac50a94b396cbddbdc15713a85726b9a88a1d519f"
+    },
+    {
+      "command": "domain list",
+      "passed": true,
+      "response_sha256": "9f0ac4ddfcbff891f6176fd8bec798de5a6e15464bd18be878a63b40511189bd"
+    },
+    {
+      "command": "help",
+      "passed": true,
+      "response_sha256": "6da91a5b2ea7295f2415b13f52a58ee91c74d0b0a10b0bcc528cbc4575c9d9f2"
+    }
+  ],
+  "claim_scope": "Actual QEMU guest controller; Azure provisioning must be verified separately. No native Hyper-V, Linux-domain, GUI or MeshStack acceptance",
+  "efi_sha256": "1bc1c7af33470edc009fa5756d3fe6063573660e07e157d19397afc680a7bb89",
+  "efi_size_bytes": 12507648,
+  "error": null,
+  "guest_memory_mib": 2048,
+  "guest_pid": 451336,
+  "guest_start_ticks": 5753760,
+  "guest_vcpus": 1,
+  "identity_verified": true,
+  "observed_kernel_banner": "ThoxInux 0.9.0 | ThoxOS Core | THOX.ai LLC",
+  "release": "v0.9.1",
+  "running": true,
+  "schema": "thoxinux.azure.guest.v1",
+  "serial_log": "/tmp/thoxinux-verify-5l10ps1z/logs/serial.log",
+  "serial_session_bytes": 2751,
+  "serial_session_offset": 5725,
+  "serial_session_sha256": "4736022539614ce545164698be8fa102eb876735fd6d77a7ffc6d9cd8f29ea67",
+  "session_id": "211ec71586dd42c7b6fb48c605d2fcca",
+  "source_commit": "fbad5952f20281ef6ad7eaefc1f54f7db4c0c6e9",
+  "started_at": "2026-11-02T04:38:12+00:00",
+  "state": "running",
+  "supervisor_pid": 451335,
+  "supervisor_start_ticks": 5753746,
+  "updated_at": "2026-11-02T04:38:16+00:00"
+}

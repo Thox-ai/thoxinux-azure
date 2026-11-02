@@ -1,0 +1,36 @@
+{
+  "scope": "readback_of_actual_local_portable_harness_test",
+  "checked_at": "2026-11-02T04:38:47.527013+00:00",
+  "serial_log_sha256": "8e6fa0f40e9b02809132df99ca0363e43fc0aba83e7dbc41020220c3d5256ba9",
+  "serial_log_matches_summary": true,
+  "source_harness_matches_tested_copy": true,
+  "session_slices": [
+    {
+      "receipt": "cold-running-receipt.json",
+      "serial_slice_sha256": "96954bbb9af4455d09c32cc6018b3a4e87e24264c4ac510df85f3c35c582a50b",
+      "matches": true
+    },
+    {
+      "receipt": "cold-stopped-receipt.json",
+      "serial_slice_sha256": "575d063bff341b74821d14d5a25cc95d3312bac05efa659514549f590c18b8e7",
+      "matches": true
+    },
+    {
+      "receipt": "recovered-running-receipt.json",
+      "serial_slice_sha256": "4736022539614ce545164698be8fa102eb876735fd6d77a7ffc6d9cd8f29ea67",
+      "matches": true
+    },
+    {
+      "receipt": "recovered-stopped-receipt.json",
+      "serial_slice_sha256": "b64e84227cdc60fdb11ee9f3186a0bdd32819b37727d6878ed449b174a36eac4",
+      "matches": true
+    }
+  ],
+  "test_processes_still_running": {
+    "451259": false,
+    "451260": false,
+    "451335": false,
+    "451336": false
+  },
+  "all_passed": true
+}

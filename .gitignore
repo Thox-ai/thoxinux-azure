@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+azure-plan/
+plan/
+plans/
+release/
+dist/
+kernel-proof/
+*.pem
+*.key
+id_ed25519*
+id_rsa*
+.env
+.env.*
+!*.example

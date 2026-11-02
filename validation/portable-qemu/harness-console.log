@@ -1,0 +1,54 @@
+cold: released ThoxInux v0.9.1 boot and four controller checks passed
+cold: domain new azureprobe: passed
+cold: domain set azureprobe image=embedded://minimal-system-v0 init=/sbin/init memory-mib=128 autostart=false: passed
+cold: domain start azureprobe: passed
+cold: domain status azureprobe: passed
+cold: ps: passed
+cold: domain stop azureprobe: passed
+cold: domain status azureprobe: passed
+cold: domain start azureprobe: passed
+cold: domain status azureprobe: passed
+cold: domain restart azureprobe: passed
+cold: domain status azureprobe: passed
+cold: domain fail azureprobe: passed
+cold: domain status azureprobe: passed
+cold: domain start azureprobe: passed
+cold: domain status azureprobe: passed
+cold: domain stop azureprobe: passed
+cold: domain status azureprobe: passed
+cold: clean GINUX_KERNEL_OK shutdown passed
+recovered: released ThoxInux v0.9.1 boot and four controller checks passed
+recovered: domain status azureprobe: passed
+recovered: domain start azureprobe: passed
+recovered: domain status azureprobe: passed
+recovered: domain stop azureprobe: passed
+recovered: domain status azureprobe: passed
+recovered: clean GINUX_KERNEL_OK shutdown passed
+{
+  "result": "passed",
+  "scope": "local_qemu_tcg_only",
+  "release": "v0.9.1",
+  "efi_sha256": "1bc1c7af33470edc009fa5756d3fe6063573660e07e157d19397afc680a7bb89",
+  "started_at": "2026-11-02T04:37:58+00:00",
+  "azure_deployed": false,
+  "production_cli_path_tested": false,
+  "systemd_cloud_init_tested": false,
+  "uid": 65534,
+  "profile": "Q35/OVMF, 1 vCPU, 2 GiB, TCG, 48-bit IOMMU",
+  "claim_limits": [
+    "Real local kernel/controller and embedded-domain lifecycle only",
+    "Rootfs pending does not establish ready Rocky Linux or systemd userspace",
+    "No native Hyper-V, Azure deployment, production service, graphical desktop or MeshStack acceptance"
+  ],
+  "qemu": "QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)",
+  "source_commit": "fbad5952f20281ef6ad7eaefc1f54f7db4c0c6e9",
+  "supervisor_sha256": "e29e962da71d4b4b4f03b8677ee878eb2f736c7164a3c29acb6b662411142996",
+  "launcher_sha256": "c7694116061f7ea5b3d9f4eda416d9eca1410d7568d6560edf2e4617708e91c8",
+  "harness_sha256": "3825e4808a406c243ecbd8b3b2f85eefa0956edc34a84c0cb5720ef83e8fee71",
+  "boots_passed": 2,
+  "lifecycle_commands_passed": 22,
+  "controller_acceptance_checks_passed": 8,
+  "clean_shutdowns_passed": 2,
+  "final_guest_state": "stopped",
+  "log_sha256": "8e6fa0f40e9b02809132df99ca0363e43fc0aba83e7dbc41020220c3d5256ba9"
+}

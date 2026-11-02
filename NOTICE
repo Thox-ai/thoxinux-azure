@@ -1,0 +1,21 @@
+ThoxInux Azure deployment integration
+Copyright 2026 THOX.ai LLC
+Licensed under the Apache License, Version 2.0.
+
+This repository includes the canonical ThoxInux virtual-machine launcher and
+uses the publicly released ThoxInux kernel, which contains work from Ginux.
+
+Ginux
+Copyright Gregory M. Kurtzer and contributors
+Licensed under the Apache License, Version 2.0.
+Upstream: https://github.com/gmkurtzer/ginux
+Pinned upstream commit: 36503bda2d87465765e1b94e65f9d100f27ed5be
+
+Preserve UPSTREAM-NOTICE.md, payload/GINUX_LICENSE and payload/GINUX_NOTICE.
+The original upstream notices retain their source-project relative paths.
+They describe the canonical upstream source, not additional files in this
+deployment integration repository.
+
+MeshStack, ThoxKey firmware and ThoxWork are proprietary technologies of
+THOX.ai LLC. They are not included in this repository, and its Apache-2.0
+license grants no rights to those separate technologies.

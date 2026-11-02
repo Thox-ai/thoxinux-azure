@@ -1,0 +1,3 @@
+# Preserve byte-exact release pins, generated payloads and raw serial evidence.
+# Do not apply automatic line-ending conversions on checkout or commit.
+* -text

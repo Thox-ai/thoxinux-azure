@@ -1,0 +1,140 @@
+#!/usr/bin/env python3
+"""Inspect the ThoxInux service or send a noninteractive guest command."""
+import argparse
+from collections import deque
+from datetime import datetime, timezone
+import json
+import os
+from pathlib import Path
+import re
+import socket
+import sys
+
+SOCKET = Path("/run/thoxinux/control.sock")
+RECEIPT = Path("/var/log/thoxinux/acceptance.json")
+LOG = Path("/var/log/thoxinux/serial.log")
+MAX_RESPONSE = 2 * 1024 * 1024
+EXPECTED_EFI = "1bc1c7af33470edc009fa5756d3fe6063573660e07e157d19397afc680a7bb89"
+EXPECTED_RELEASE = "v0.9.1"
+EXPECTED_CHECKS = ["status", "components", "domain list", "help"]
+EXPECTED_BANNER = "ThoxInux 0.9.0 | ThoxOS Core | THOX.ai LLC"
+
+
+def live_process(pid, expected_ticks, program):
+    if not isinstance(pid, int) or isinstance(pid, bool) or pid <= 1:
+        return False
+    if not isinstance(expected_ticks, int) or isinstance(expected_ticks, bool):
+        return False
+    try:
+        os.kill(pid, 0)
+        directory = Path(f"/proc/{pid}")
+        stat_fields = (directory / "stat").read_text().rsplit(")", 1)[1].split()
+        if stat_fields[0] == "Z" or int(stat_fields[19]) != expected_ticks:
+            return False
+        arguments = (directory / "cmdline").read_bytes().split(b"\0")
+        if program == "guest_service.py":
+            return b"/opt/thoxinux/guest_service.py" in arguments
+        return bool(arguments and Path(os.fsdecode(arguments[0])).name == "qemu-system-x86_64")
+    except (OSError, ValueError, IndexError):
+        return False
+
+
+def valid_acceptance(record):
+    if not isinstance(record, dict):
+        return False
+    checks = record.get("checks")
+    if not isinstance(checks, list) or len(checks) != len(EXPECTED_CHECKS):
+        return False
+    if any(not isinstance(check, dict) for check in checks):
+        return False
+    return (record.get("schema") == "thoxinux.azure.guest.v1"
+            and record.get("release") == EXPECTED_RELEASE
+            and record.get("efi_sha256") == EXPECTED_EFI
+            and record.get("efi_size_bytes") == 12507648
+            and record.get("identity_verified") is True
+            and record.get("observed_kernel_banner") == EXPECTED_BANNER
+            and record.get("state") == "running"
+            and record.get("accepted") is True
+            and record.get("running") is True
+            and [check.get("command") for check in checks] == EXPECTED_CHECKS
+            and all(check.get("passed") is True
+                    and re.fullmatch(r"[0-9a-f]{64}", str(check.get("response_sha256", "")))
+                    for check in checks))
+
+
+def status():
+    try:
+        record = json.loads(RECEIPT.read_text())
+        if not isinstance(record, dict):
+            raise ValueError("Acceptance receipt must be an object")
+    except (OSError, ValueError) as exc:
+        print(json.dumps({"accepted": False, "running": False, "state": "unavailable", "error": str(exc)}))
+        return 1
+    age = None
+    try:
+        age = (datetime.now(timezone.utc) - datetime.fromisoformat(record["updated_at"])).total_seconds()
+    except (KeyError, TypeError, ValueError):
+        pass
+    alive = (live_process(record.get("supervisor_pid"), record.get("supervisor_start_ticks"), "guest_service.py")
+             and live_process(record.get("guest_pid"), record.get("guest_start_ticks"), "qemu"))
+    running = bool(record.get("running")) and alive and SOCKET.is_socket() and age is not None and 0 <= age < 90
+    checks = record.get("checks") if isinstance(record.get("checks"), list) else []
+    summary = {key: record.get(key) for key in ("release", "state", "efi_sha256", "accepted_at", "updated_at", "error")}
+    summary.update(accepted=valid_acceptance(record) and running, running=running,
+                   heartbeat_age_seconds=round(age, 1) if age is not None else None,
+                   checks_passed=sum(isinstance(check, dict) and check.get("passed") is True for check in checks),
+                   checks_total=4, serial_log=str(LOG))
+    print(json.dumps(summary, indent=2))
+    return 0 if summary["accepted"] and summary["running"] else 1
+
+
+def command(words):
+    text = " ".join(words)
+    if not text or len(text) > 240 or any(ord(c) < 32 or ord(c) > 126 for c in text):
+        raise ValueError("Supply one printable ASCII controller command, at most 240 characters")
+    with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as client:
+        client.settimeout(40)
+        client.connect(str(SOCKET))
+        client.sendall((json.dumps({"command": text}) + "\n").encode())
+        payload = bytearray()
+        while b"\n" not in payload:
+            block = client.recv(65536)
+            if not block:
+                raise ValueError("Supervisor closed the connection without a complete response")
+            payload.extend(block)
+            if len(payload) > MAX_RESPONSE:
+                raise ValueError("Supervisor response exceeded the bounded transport size")
+    response = json.loads(bytes(payload).split(b"\n", 1)[0])
+    if not response.get("ok"):
+        print(response.get("error", "Controller command rejected"), file=sys.stderr)
+        return 1
+    print(response["output"])
+    return 0
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    sub = parser.add_subparsers(dest="action", required=True)
+    sub.add_parser("status")
+    tail = sub.add_parser("logs")
+    tail.add_argument("--lines", type=int, default=30)
+    issue = sub.add_parser("command")
+    issue.add_argument("words", nargs=argparse.REMAINDER)
+    args = parser.parse_args()
+    try:
+        if args.action == "status":
+            return status()
+        if args.action == "command":
+            return command(args.words)
+        if not 1 <= args.lines <= 200:
+            parser.error("--lines must be between 1 and 200")
+        with LOG.open(errors="replace") as stream:
+            print("".join(deque(stream, maxlen=args.lines)), end="")
+        return 0
+    except (OSError, ValueError) as exc:
+        print(f"ThoxInux: {exc}", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
