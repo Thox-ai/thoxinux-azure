@@ -134,3 +134,17 @@ This initial release has no supported in-place upgrade procedure. For a changed 
 Copyright © 2026 THOX.ai LLC. This deployment integration is licensed under [Apache-2.0](LICENSE). Preserve [NOTICE](NOTICE), [upstream attribution](UPSTREAM-NOTICE.md), `payload/GINUX_LICENSE` and `payload/GINUX_NOTICE`. The latter files are hash-bound to the upstream release. MeshStack, ThoxKey firmware and ThoxWork are separate proprietary THOX technologies and are not included or licensed by this repository.
 
 Deployment readiness, local kernel acceptance and live Azure acceptance are tracked separately. Public documentation must describe actual evidence and must not imply provider certification or full operating-system readiness. Changes follow [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).
+
+---
+
+## Legal
+
+Copyright (c) 2024-2026 THOX.ai LLC. All rights reserved.
+
+**THOX.ai LLC**
+- CTO: Tommy Xaypanya
+- CEO: Craig Ross
+
+Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for details.
+
+Unauthorized copying, modification, merger, publication, distribution, sublicensing, and/or selling of this software, via any medium, is strictly prohibited without prior written consent from THOX.ai LLC.
