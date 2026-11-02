@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" role="img" aria-labelledby="title description">
+<title id="title">ThoxInux v0.9.1: recorded local kernel verification</title>
+<desc id="description">Rendered transcript excerpt from an actual local QEMU TCG run on November 1, 2026 CST (November 2 UTC). Two boots, eight controller checks, 22 embedded-domain lifecycle commands and two clean shutdowns passed. Azure deployment was not tested.</desc>
+<metadata>{&quot;azure_deployed&quot;: false, &quot;display_timezone&quot;: &quot;America/Chicago&quot;, &quot;ended_at&quot;: &quot;2026-11-02T04:38:19+00:00&quot;, &quot;scope&quot;: &quot;local_qemu_tcg_only&quot;, &quot;selected_line_numbers_1_based&quot;: [1, 2, 4, 11, 13, 15, 19, 20, 21, 22, 24, 26], &quot;serial_sha256&quot;: &quot;8e6fa0f40e9b02809132df99ca0363e43fc0aba83e7dbc41020220c3d5256ba9&quot;, &quot;source&quot;: &quot;validation/portable-qemu/harness-console.log&quot;, &quot;source_sha256&quot;: &quot;5155517e3ad42f135c413f1b5292c7b05f5e7861d3371f4f31b0752ed7ab4d4b&quot;, &quot;started_at&quot;: &quot;2026-11-02T04:37:58+00:00&quot;, &quot;summary&quot;: &quot;validation/portable-qemu/summary.json&quot;, &quot;type&quot;: &quot;rendered_excerpt_of_actual_local_run&quot;}</metadata>
+<rect width="1200" height="780" rx="20" fill="#111318"/>
+<path d="M46 49H1154" stroke="#05A451" stroke-width="5"/>
+<g font-family="Inter, Arial, sans-serif">
+<text x="46" y="88" font-size="14" font-weight="600" letter-spacing="1.4" fill="#BBC5CF">ACTUAL LOCAL RUN · RENDERED TRANSCRIPT</text>
+<text x="46" y="143" font-size="40" font-weight="700" fill="#FFFFFF">ThoxInux kernel verification</text>
+<text x="46" y="177" font-size="18" fill="#CBD2DA">Released EFI v0.9.1 · QEMU 8.2.2 / OVMF / TCG · 1 vCPU / 2 GiB</text>
+<rect x="46" y="210" width="262" height="88" rx="8" fill="#20252C"/>
+<text x="64" y="251" font-size="31" font-weight="700" fill="#FFFFFF">2</text>
+<text x="64" y="280" font-size="16" fill="#CBD2DA">boots passed</text>
+<rect x="328" y="210" width="262" height="88" rx="8" fill="#20252C"/>
+<text x="346" y="251" font-size="31" font-weight="700" fill="#FFFFFF">8</text>
+<text x="346" y="280" font-size="16" fill="#CBD2DA">controller checks</text>
+<rect x="610" y="210" width="262" height="88" rx="8" fill="#20252C"/>
+<text x="628" y="251" font-size="31" font-weight="700" fill="#FFFFFF">22</text>
+<text x="628" y="280" font-size="16" fill="#CBD2DA">lifecycle commands</text>
+<rect x="892" y="210" width="262" height="88" rx="8" fill="#20252C"/>
+<text x="910" y="251" font-size="31" font-weight="700" fill="#FFFFFF">2</text>
+<text x="910" y="280" font-size="16" fill="#CBD2DA">clean shutdowns</text>
+</g>
+<rect x="46" y="326" width="1108" height="338" rx="8" fill="#080B10"/>
+<g font-family="JetBrains Mono, DejaVu Sans Mono, monospace" font-size="17" fill="#E1E7EE">
+<text x="66" y="354">cold: released ThoxInux v0.9.1 boot and four controller checks passed</text>
+<text x="66" y="380">cold: domain new azureprobe: passed</text>
+<text x="66" y="406">cold: domain start azureprobe: passed</text>
+<text x="66" y="432">cold: domain restart azureprobe: passed</text>
+<text x="66" y="458">cold: domain fail azureprobe: passed</text>
+<text x="66" y="484">cold: domain start azureprobe: passed</text>
+<text x="66" y="510">cold: clean GINUX_KERNEL_OK shutdown passed</text>
+<text x="66" y="536">recovered: released ThoxInux v0.9.1 boot and four controller checks passed</text>
+<text x="66" y="562">recovered: domain status azureprobe: passed</text>
+<text x="66" y="588">recovered: domain start azureprobe: passed</text>
+<text x="66" y="614">recovered: domain stop azureprobe: passed</text>
+<text x="66" y="640">recovered: clean GINUX_KERNEL_OK shutdown passed</text>
+</g>
+<g font-family="Inter, Arial, sans-serif" font-size="15" fill="#CBD2DA">
+<text x="46" y="697">Recorded 2026-11-01, 22:37:58-22:38:19 CST (UTC-06:00). Selected exact console lines.</text>
+<text x="46" y="726" fill="#FFFFFF">Scope: local kernel/controller and embedded-domain lifecycle. Azure deployment remains unverified.</text>
+<text x="46" y="754">Final guest state: stopped. This document render is not an Azure interface or a graphical ThoxOS session.</text>
+</g>
+</svg>

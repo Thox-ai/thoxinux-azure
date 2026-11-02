@@ -29,11 +29,13 @@ sha256sum -c SHA256SUMS
 
 `tools/build_release.py` contains an explicit path allowlist. It includes the
 deployment templates, public documentation, reviewed payload, helper tools,
-named tests, verification workflow and known public validation records. Raw
+named tests, verification workflow and known public validation records. The
+exact inventory also includes `VERSION`, `RELEASE_NOTES.md`, the release helper,
+the public repository-standard mapping and the HTML/PDF/SVG local-test preview. Raw
 kernel binaries remain available from the separately pinned upstream release.
 Git history can be distributed as a separate Git bundle.
 
-The packer never includes `.git/`, internal handoffs, unrelated private
+The packer never includes `.git/`, `AGENTS.md`, internal handoffs, unrelated private
 directories, keys, local deployment plans, raw release binaries or Python bytecode.
 Unexpected files inside a known public source root cause a failure. Add a new
 public source path to the allowlist only after reviewing its content. Symlinked
@@ -41,7 +43,10 @@ source files and special files are refused.
 
 Historical and new verification records retain their actual recorded bytes.
 Packaging does not turn local QEMU tests into Azure deployment, production
-systemd acceptance or a new kernel release. No Git tag or publication is created.
+systemd acceptance or a new kernel release. The preview renders recorded output;
+the original logs remain unchanged. No Git tag or publication is created by
+the packer. Release publication is a separate operation documented in
+[PUBLISH.md](PUBLISH.md).
 
 ## Determinism and repeated builds
 
@@ -60,6 +65,7 @@ changed source snapshot:
 python3 tools/build_release.py --output-dir dist/new-snapshot
 ```
 
-The package manifest describes the bytes actually included. It does not assign
-a version or substitute a Git commit identifier for an independently verified
-source-history record.
+The package manifest describes the bytes actually included. `VERSION` records
+the deployment package's version independently of the pinned ThoxInux kernel
+release. The packer does not assign either version or substitute a Git commit
+identifier for an independently verified source-history record.

@@ -19,3 +19,11 @@ deployment integration repository.
 MeshStack, ThoxKey firmware and ThoxWork are proprietary technologies of
 THOX.ai LLC. They are not included in this repository, and its Apache-2.0
 license grants no rights to those separate technologies.
+
+The HTML preview uses installed Inter/system sans-serif and JetBrains Mono/system
+monospace fallbacks. It contains no font files and performs no font downloads.
+docs/PREVIEW.pdf includes standard document font subsets of Inter and JetBrains
+Mono, whose font software is licensed under the SIL Open Font License 1.1.
+Font attribution and OFL text are retained in the HTML source comments.
+The THOX.ai brand mark in the preview remains a THOX.ai LLC trademark;
+no trademark license is implied.

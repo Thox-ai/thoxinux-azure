@@ -1,33 +1,10 @@
 name: Verify deployment and kernel
 
+# Documentation and metadata commits receive the same gate as code commits.
 on:
   push:
     branches: [main]
-    paths:
-      - .github/workflows/verify.yml
-      - payload/**
-      - tests/**
-      - tools/**
-      - README.md
-      - .gitattributes
-      - portal/**
-      - deploy.py
-      - azuredeploy.json
-      - cloud-init.yaml
-      - build_cloud_init.py
   pull_request:
-    paths:
-      - .github/workflows/verify.yml
-      - payload/**
-      - tests/**
-      - tools/**
-      - README.md
-      - .gitattributes
-      - portal/**
-      - deploy.py
-      - azuredeploy.json
-      - cloud-init.yaml
-      - build_cloud_init.py
   workflow_dispatch:
 
 permissions:
@@ -35,19 +12,31 @@ permissions:
 
 concurrency:
   group: verify-${{ github.ref }}
-  cancel-in-progress: true
+  # Do not interrupt a main-branch run while it is issuing a release.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   verify:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    outputs:
+      release_artifact_id: ${{ steps.release_bundle.outputs.artifact-id }}
+      publish_release: ${{ steps.release_request.outputs.publish_release }}
     env:
       PYTHONDONTWRITEBYTECODE: '1'
     steps:
-      - name: Check out reviewed source
+      - name: Check out exact source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
           persist-credentials: false
+
+      - name: Check whether this push issues a version
+        id: release_request
+        env:
+          THOX_PUSH_BEFORE: ${{ github.event.before }}
+        run: python3 tools/create_release.py requested >> "$GITHUB_OUTPUT"
 
       - name: Check unit guards and generated deployment files
         run: |
@@ -72,3 +61,49 @@ jobs:
           path: ${{ runner.temp }}/thoxinux-kernel-proof/
           retention-days: 30
           if-no-files-found: error
+
+      - name: Package verified source and current CI evidence
+        run: >-
+          python3 tools/create_release.py prepare
+          --proof-dir "$RUNNER_TEMP/thoxinux-kernel-proof"
+          --output-dir "$RUNNER_TEMP/thoxinux-release"
+
+      - name: Preserve verified release inputs
+        id: release_bundle
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: thoxinux-release-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/thoxinux-release/
+          retention-days: 30
+          if-no-files-found: error
+
+  release:
+    name: Issue engineering prerelease
+    needs: verify
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'Thox-ai/thoxinux-azure' && needs.verify.outputs.publish_release == 'true' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - name: Check out the verified commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Download exact verification artifact
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          artifact-ids: ${{ needs.verify.outputs.release_artifact_id }}
+          path: ${{ runner.temp }}/thoxinux-release/
+          digest-mismatch: error
+
+      - name: Publish or verify immutable prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          python3 tools/create_release.py publish
+          --artifact-dir "$RUNNER_TEMP/thoxinux-release"

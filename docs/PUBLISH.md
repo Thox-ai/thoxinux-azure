@@ -1,12 +1,18 @@
-# Publish the prepared GitHub repository
+# Publish source and issue an engineering preview
 
-The intended public repository is **`Thox-ai/thoxinux-azure`**. The Deploy to Azure button becomes usable after its raw template is publicly available at that repository's `main/portal/azuredeploy.json` path.
+The destination is the public **Thox-ai/thoxinux-azure** GitHub repository. The repository has been created. Source publication, CI verification, a formal integration release and Azure deployment are separate operations.
 
-This helper publishes GitHub source only. It creates no Azure resources, does not invoke Azure APIs, and creates no Azure charges. Azure deployment remains a separate action through the portal or CLI.
+The Deploy to Azure button requires anonymous access to `main/portal/azuredeploy.json`. Its presence in an unpublished local README does not make the remote template available.
 
-## Open the prepared Git bundle
+## Access required
 
-The delivery archive contains `thoxinux-azure.bundle` and a separate source ZIP. Use the bundle to preserve the prepared commit and authorship. Extract the delivery archive, then run these commands from the directory containing the bundle:
+The publishing account or GitHub App must have contents-write access to this repository, with the permissions needed to publish workflow files. A public read and a user's administrative role do not grant an integration write access. If a write returns `Resource not accessible by integration`, verify the app installation and repository selection for the owning organization. Do not substitute another account's credentials or remove protections.
+
+The release job uses GitHub Actions' repository token with `contents: write` only in that job. Verification and pull-request jobs retain read-only permissions. Organization policy may restrict workflow tokens or Actions; report the actual failure instead of disabling its controls.
+
+## Preserve the prepared Git history
+
+The delivery archive includes a Git bundle and a separate source ZIP. To reconstruct the committed repository, run from the directory containing the bundle:
 
 ```bash
 git clone --branch main thoxinux-azure.bundle thoxinux-azure
@@ -14,64 +20,85 @@ cd thoxinux-azure
 git remote remove origin
 ```
 
-The clone's initial `origin` points to the local bundle file. The last command removes only that freshly created local-bundle reference so the publication helper can add the new GitHub target. It does not delete any files or change any remote repository.
+The removed origin points only to the local bundle. This does not delete source or modify any remote repository. The source ZIP intentionally omits `.git`; extracting it does not reconstruct the commit history.
 
-If you already have the prepared clean Git repository, use it directly. The separate source ZIP is for inspection and copying; it intentionally contains no `.git` directory. Extracting that ZIP alone does not meet the helper's committed-repository prerequisite.
+## Publish into the existing empty destination
 
-## Before publication
-
-Use a machine with Git, Python 3 and a current GitHub CLI. Sign in to `gh` outside the helper using the intended account, with permission to create a public repository in the `Thox-ai` organization. The helper never signs in, refreshes a credential, prints a token, or changes global Git authentication settings.
-
-The prepared source must be a normal local Git repository with a committed, clean `main` branch. The helper checks the actual Git root, tracked README/template, working tree, remotes and README button target before it can create anything. A detached branch, uncommitted or untracked file, mismatched remote, unverified repository lookup, or already-existing GitHub repository stops publication.
-
-The current GitHub CLI must support `gh auth status --no-refresh`; this ensures the dry run does not refresh stored credentials. If the command is unavailable, update GitHub CLI outside this helper.
-
-If this machine is not signed in yet, authenticate once before running the helper:
+Use the intended authorized GitHub account in a trusted terminal with Git, Python 3.11+ and a current GitHub CLI. Authenticate with GitHub's own flow if needed:
 
 ```bash
 gh auth login --hostname github.com
+gh auth status --active --hostname github.com --no-refresh
+gh repo view Thox-ai/thoxinux-azure --json nameWithOwner,isPrivate,defaultBranchRef
 ```
 
-Complete GitHub's own sign-in flow. Do not put tokens in a command, source file or chat. If an account is already authenticated, keep that session and proceed.
-
-## Review the concrete actions
-
-From the repository root:
+Confirm the exact repository and public visibility, then inspect its branch inventory:
 
 ```bash
-python3 tools/publish_github.py --repository Thox-ai/thoxinux-azure --dry-run
+gh api repos/Thox-ai/thoxinux-azure/branches
 ```
 
-Dry run performs read-only local and GitHub checks. It prints the authenticated account, committed source ID, exact public repository, deployment button, and argument arrays for the proposed actions. It creates no repository, adds no remote, pushes no commit, and writes no receipt.
-
-## Publish
+The initial destination should return an empty array. If branches now exist, inspect and integrate the actual state; do not overwrite it or force-push this snapshot. From the clean reconstructed repository, add the exact origin and push main:
 
 ```bash
-python3 tools/publish_github.py --repository Thox-ai/thoxinux-azure
+git remote add origin https://github.com/Thox-ai/thoxinux-azure.git
+git -c credential.helper= \
+  -c 'credential.https://github.com.helper=!gh auth git-credential' \
+  push --set-upstream origin main:main
 ```
 
-The helper rechecks the local commit and remote absence, then:
+This push does not use force. The command-specific helper uses the existing GitHub CLI authentication without writing a global Git credential setting. Preserve any unexpected push error and inspect the remote state before retrying.
 
-1. Creates a **new public** GitHub repository with no starter commit.
-2. Verifies its identity, public visibility and empty branch list.
-3. Adds `origin` locally only when absent.
-4. Pushes the committed local `main` without force.
-5. Verifies GitHub's `main` commit matches the local source.
-6. Downloads the public raw portal template **without authentication** and checks its SHA-256 against the committed file.
+Set the GitHub About description through an account with repository administration access:
 
-The final JSON result distinguishes verified GitHub publication from live Azure deployment. A successful publication makes the template URL available to Azure; it does not prove that a subscription has accepted or run the deployment.
+```bash
+gh repo edit Thox-ai/thoxinux-azure \
+  --description 'Deploy the real ThoxInux kernel on Azure with a pinned release, portal button, automatic guest acceptance and reproducible validation.'
+```
 
-## If publication stops partway through
+A source README or workflow token does not establish that this metadata update succeeded. Read back the description after the operation.
 
-The helper never deletes a repository, changes an existing repository's visibility, force-pushes, or retries a write. It refuses to reuse an existing repository, even if an earlier run created it successfully but failed to push or verify.
+## Verify publication
 
-If it reports that a repository was created, inspect that exact repository and the local `origin` before taking further action. The error identifies the completed creation and unverified later stage. Preserve its state for a deliberate follow-up; do not change the helper's absence checks to make a retry proceed.
+Compare the actual remote main commit with the local source:
 
-Only use another `--repository OWNER/NAME` after intentionally updating and committing the README Deploy to Azure button to point to that exact repository. This package is prepared for `Thox-ai/thoxinux-azure`; it will not silently publish under a personal account or another namespace.
+```bash
+git rev-parse HEAD
+gh api repos/Thox-ai/thoxinux-azure/git/ref/heads/main --jq .object.sha
+```
+
+When publishing through GitHub's file API instead of pushing a bundle, commit history can differ. Verify the complete tree and exact file hashes in that case; do not claim identical commits.
+
+Download the public template without authentication and compare its SHA-256 with `portal/azuredeploy.json`. The README button must decode to this exact raw target:
+
+```text
+https://raw.githubusercontent.com/Thox-ai/thoxinux-azure/main/portal/azuredeploy.json
+```
+
+The workflow page must show a completed successful verification run for the published commit before a CI success claim is made. Live Azure ARM validation is still a later step.
+
+## Formal prerelease gate
+
+The initial deployment integration version is **v0.1.0-rc.1**, independent of the kernel's **v0.9.1** release. `VERSION`, `CHANGELOG.md` and `RELEASE_NOTES.md` identify the intended integration version; they do not by themselves constitute a GitHub Release.
+
+The workflow verifies every main-branch and pull-request change, including documentation. It runs the unit suite, checks generated files, boots the actual released kernel twice and packages the reviewed source plus the fresh CI evidence. A separate release job can publish only after verification succeeds for the exact source commit and the workflow's release-request conditions are met.
+
+The release job uses the exact verification artifact ID and enforces its digest. It creates or verifies the immutable version tag, publishes an engineering prerelease and uploads the source, manifest, checksums and actual CI kernel evidence. It never overwrites an issued tag or an existing different asset. Same-source retries preserve the original evidence. An uncertain publication outcome requires readback before another write.
+
+A new intended release requires an explicit VERSION change and corresponding release notes. Documentation-only changes still run verification but must not silently move the existing version tag. Manual workflow dispatch performs verification only. Rerun a failed release job to resume the same verified commit and artifact; a different commit requires its own reviewed version change.
+
+Before reporting a release complete, verify its actual Release ID and URL, non-draft prerelease state, publication time, tag commit, notes, assets and downloaded hashes. A failed workflow or a draft candidate remains unfinished. No successful Azure deployment follows from a source release or local QEMU result.
+
+## Creating a different new repository
+
+`tools/publish_github.py` is retained for the separate case of creating a **new** public repository. It intentionally refuses a destination that already exists, so do not use it to initialize this already-created repository. For a different destination, first deliberately update and commit the README deployment button and applicable repository references.
+
+The helper requires a clean committed main branch, verifies authentication and remote absence, creates the new public repository, pushes without force and checks anonymous access to the template. Its `--dry-run` performs read-only checks. It creates no Azure resources.
 
 ## References
 
-- [GitHub CLI authentication status](https://cli.github.com/manual/gh_auth_status)
-- [GitHub CLI repository creation](https://cli.github.com/manual/gh_repo_create)
-- [GitHub: Add locally hosted code](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github)
-- [Microsoft: Deploy to Azure button](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-azure-button)
+- [GitHub App installation and authorization](https://docs.github.com/en/apps/using-github-apps/installing-a-github-app-from-a-third-party)
+- [GitHub CLI authentication](https://cli.github.com/manual/gh_auth_status)
+- [GitHub repository metadata](https://cli.github.com/manual/gh_repo_edit)
+- [GitHub release creation](https://cli.github.com/manual/gh_release_create)
+- [Microsoft Deploy to Azure button](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-azure-button)

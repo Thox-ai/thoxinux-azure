@@ -26,9 +26,10 @@ class PackagingTests(unittest.TestCase):
             path.write_bytes(("fixture:" + relative + "\n").encode())
 
     def test_private_files_keys_binaries_plans_and_git_are_not_packaged(self):
-        for relative in ("HANDOFF.md", "private/account.txt", "keys/id_ed25519",
+        for relative in ("AGENTS.md", "HANDOFF.md", "private/account.txt", "keys/id_ed25519",
                          "id_rsa", ".env", ".git/config", "azure-plan/parameters.json",
-                         "release/GINUX.EFI", "payload/__pycache__/guest_service.pyc"):
+                         "private-policy-cache/policy.md", "release/GINUX.EFI",
+                         "payload/__pycache__/guest_service.pyc"):
             path = self.source / relative
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("PRIVATE-FIXTURE-NOT-A-REAL-SECRET")

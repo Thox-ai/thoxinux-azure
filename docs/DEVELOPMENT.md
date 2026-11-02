@@ -16,7 +16,7 @@ The deployment helpers use Python's standard library. Local kernel verification 
 | `build_cloud_init.py` | Generates `cloud-init.yaml` from payload files |
 | `portal/build_portal.py` | Generates the self-contained portal template and acceptance extension |
 | `tools/verify_kernel.py` | Runs real local boot, lifecycle and recovery verification |
-| `.github/workflows/verify.yml` | Prepared CI workflow for static and actual kernel checks |
+| `.github/workflows/verify.yml` | CI workflow for static and actual kernel checks |
 
 ## Check generated files and unit guards
 
@@ -85,8 +85,27 @@ Save separate evidence for ARM validation, resource provisioning and the guest's
 
 ## CI and publication
 
-The prepared workflow runs on Ubuntu 24.04, uses action commit pins, grants a read-only contents token, checks generated files, boots the real kernel and uploads evidence. The workflow does not provision Azure or receive Azure credentials. Only a completed remote run supports a GitHub CI success claim.
+The verification workflow runs on Ubuntu 24.04, uses action commit pins, checks generated files, boots the real kernel and uploads evidence. Its verification job needs only read access to repository contents. Release publication is a separate operation with explicitly scoped write permission. Neither operation provisions Azure or requires Azure credentials. Only a completed remote run supports a GitHub CI success claim.
 
 The Deploy to Azure button must resolve to the published public raw `portal/azuredeploy.json`. Keep the README URL and repository destination consistent; a local template check cannot establish remote availability. Follow [PUBLISH.md](PUBLISH.md) for the exact repository publication procedure and verify the anonymous raw template after push.
 
 Preserve the Apache-2.0 license and upstream notices when distributing the package. Current evidence and its limits belong in [VALIDATION.md](VALIDATION.md), with the raw receipts alongside it.
+
+## Continuing implementation and acceptance
+
+Start from the integration release's exact commit or the reviewed pull-request head, and record the full base and head SHAs with the change. The upstream kernel remains pinned to `fbad5952f20281ef6ad7eaefc1f54f7db4c0c6e9`; that kernel revision and this integration's own release commit are different identities. Check for existing work before editing and keep changes scoped to the relevant component.
+
+The recorded local baseline has passed two real boots, eight controller checks, 22 lifecycle requests, persistent-state recovery and two clean shutdowns. It leaves the guest stopped. The production Azure/cloud-init/systemd path still needs its own execution evidence. A published source release does not close that gap.
+
+| Continuing work | Responsible role | Required result |
+| --- | --- | --- |
+| Review a source or documentation change | Contributor and repository reviewer | Exact base/head, changed paths, documentation review, relevant test results and known limits. |
+| Validate Azure deployment | Operator with permission in the intended subscription | A new dedicated resource group, ARM and provisioning results, exact host image, service state and current kernel acceptance. |
+| Verify a release | Release maintainer and reviewer | Formal prerelease record, resolved tag commit, workflow result, packaged artifacts and matching downloaded checksums. |
+| Change a kernel or launcher pin | Kernel maintainer and integration reviewer | Reviewed upstream bytes, updated fixed identities, regenerated payloads and a new real two-boot verification record. |
+
+These roles describe responsibilities, not evidence that a person or external runtime has accepted or completed an assignment. Preserve unresolved failures and the commands needed to reproduce them in the pull request or release record.
+
+Stop the affected operation when the expected source changes, a digest fails, a resource is not owned by the deployment, or acceptance fails. Inspect the actual state before retrying. Keep existing evidence and deployment plans intact. For recovery, use a verified prior source release in a new plan/resource group; never move an issued tag or repurpose an existing plan. Stopping the guest service does not stop Azure compute charges; deallocate the VM when the lab is idle. See the [user guide](USER_GUIDE.md) for lifecycle and storage consequences.
+
+The [repository requirements map](REPOSITORY_STANDARD.md) identifies the public deliverables and evidence boundaries. Private operational pickup records stay outside this public source and its archives.

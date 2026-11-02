@@ -1,10 +1,10 @@
 {
-  "scope": "local_unit_transport_packaging_and_publication_guard_tests_not_azure",
-  "executed_utc": "2026-11-02T04:44:04.367229+00:00",
-  "tests_run": 93,
+  "scope": "local_unit_transport_packaging_publication_and_release_guard_tests_not_azure_or_remote_ci",
+  "executed_utc": "2026-11-02T05:35:01.583928+00:00",
+  "tests_run": 113,
   "failures": 0,
   "errors": 0,
   "skipped": 0,
-  "passed": 93,
+  "passed": 113,
   "success": true
 }

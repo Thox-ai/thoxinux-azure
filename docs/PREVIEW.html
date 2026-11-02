@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Recorded local QEMU verification of the released ThoxInux v0.9.1 kernel, with exact source evidence and reproduction instructions.">
+<meta name="template-version" content="1.0.0">
+<meta name="brand-source-commit" content="8b790e02dada0509a720440433d7a014d2b390b6">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; font-src data:; style-src 'unsafe-inline'; script-src 'none'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>ThoxInux kernel verification | Recorded local preview</title>
+<!-- THOX document template 1.0.0, adapted as a recorded local evidence preview. Font attribution notices are retained below; this HTML uses installed system fonts only. -->
+<!-- Copyright (c) 2016 The Inter Project Authors (https://github.com/rsms/inter)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+http://scripts.sil.org/OFL
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded,
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION AND CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+
+
+
+Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://scripts.sil.org/OFL
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION & CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+
+ -->
+<style>
+/* THOX document theme. Editorial styles, not a replacement TXF token system.
+   Identity: supplied outlined corporate master; primary accent #05A451.
+   Font-face declarations are inserted by source/build_templates.py. */
+:root {
+  --ink: #000;
+  --muted: #4b5563;
+  --primary: #05a451;
+  --link: #064e2e;
+  --line: #d1d5db;
+  --wash: #f3f4f6;
+  --paper: #fff;
+  --mono: "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+  --body: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: auto; scroll-padding-top: 1.5rem; }
+body { margin: 0; color: var(--ink); background: var(--paper); font: 400 16px/1.65 var(--body); -webkit-text-size-adjust: 100%; }
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+.skip-link { position: absolute; left: 1rem; top: -8rem; z-index: 10; background: white; padding: .75rem 1rem; border: 2px solid var(--ink); }
+.skip-link:focus { top: 1rem; }
+.document-header, .layout, .document-footer { max-width: 1264px; margin-inline: auto; padding-inline: 48px; }
+.document-header { padding-top: 36px; padding-bottom: 30px; border-bottom: 1px solid var(--line); }
+.brand-line { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+.brand-logo { display: block; width: 166px; height: auto; max-width: 40vw; }
+.document-kind { font-size: .8125rem; line-height: 1.45; text-align: right; color: var(--muted); }
+.document-kind strong { display: block; color: var(--ink); font-size: .875rem; font-weight: 600; }
+.layout { display: grid; grid-template-columns: 208px minmax(0,1fr); gap: 56px; align-items: start; }
+.contents { position: sticky; top: 24px; padding-block: 36px; font-size: .8125rem; line-height: 1.45; }
+.contents h2 { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 15px; }
+.contents ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; }
+.contents li { margin: 0; counter-increment: toc; border-top: 1px solid var(--line); }
+.contents a { display: grid; grid-template-columns: 24px 1fr; gap: 7px; padding: 10px 0; text-decoration: none; color: var(--ink); }
+.contents a::before { content: counter(toc, decimal-leading-zero); font: 400 .72rem/1.7 var(--mono); color: var(--muted); }
+.contents a:hover { color: var(--link); }
+.contents .utility { margin-top: 22px; color: var(--muted); font-size: .75rem; }
+main { min-width: 0; padding-top: 36px; padding-bottom: 52px; }
+.cover { padding-bottom: 34px; border-bottom: 3px solid var(--primary); }
+h1 { font-size: clamp(2rem, 3.15vw, 3.1rem); line-height: 1.12; letter-spacing: -.045em; font-weight: 700; margin: 0 0 22px; overflow-wrap: anywhere; }
+.subtitle { font-size: 1.08rem; line-height: 1.6; color: var(--muted); max-width: 58ch; margin: 0 0 26px; }
+.field { font-family: var(--mono); font-size: .91em; overflow-wrap: anywhere; }
+h1 .field { font: inherit; }
+.meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 17px 32px; margin: 0; }
+.meta div { min-width: 0; }
+.meta dt, .label { color: var(--muted); font-size: .7rem; font-weight: 600; line-height: 1.45; letter-spacing: .065em; text-transform: uppercase; margin-bottom: 3px; }
+.meta dd { font-size: .875rem; margin: 0; }
+.status-line { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 20px; font-size: .8rem; color: var(--muted); }
+.status { border: 1px solid #a2b4a9; padding: 3px 9px; font-size: .6875rem; line-height: 1.5; font-weight: 700; letter-spacing: .06em; color: var(--ink); }
+.author-note { background: var(--wash); border-left: 3px solid var(--primary); padding: 14px 18px; margin: 25px 0 0; font-size: .8rem; color: var(--muted); }
+.author-note p { margin: 0; }
+.author-note strong { color: var(--ink); }
+section { scroll-margin-top: 1.5rem; padding-top: 34px; }
+h2 { display: flex; align-items: baseline; gap: 12px; font-size: 1.35rem; font-weight: 600; line-height: 1.3; letter-spacing: -.022em; margin: 0 0 16px; }
+h2 .number { color: var(--link); font: 500 .8rem/1.5 var(--mono); flex: 0 0 25px; }
+h3 { font-size: 1rem; line-height: 1.4; margin: 24px 0 9px; font-weight: 600; }
+p { margin: 0 0 13px; }
+ul, ol { padding-left: 1.35rem; margin: 10px 0 18px; }
+li { padding-left: .1rem; margin-block: 6px; }
+.guide { color: var(--muted); font-size: .8rem; line-height: 1.65; }
+.placeholder { border-bottom: 1px solid var(--line); padding: 0 0 16px; margin: 0 0 18px; color: var(--muted); }
+.statement { font-size: 1.08rem; line-height: 1.65; max-width: 64ch; }
+.two-col { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 26px; }
+.two-col h3 { margin-top: 0; }
+.table-scroll { max-width: 100%; overflow-x: auto; margin: 20px 0; }
+table { border-collapse: collapse; width: 100%; font-size: .8rem; line-height: 1.55; text-align: left; }
+caption { text-align: left; margin-bottom: 9px; color: var(--muted); font-size: .72rem; }
+th, td { padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: anywhere; }
+th { color: var(--ink); font-size: .72rem; font-weight: 600; background: var(--wash); border-top: 1px solid var(--line); }
+td:first-child { color: var(--ink); }
+.table-scroll th, .table-scroll td { min-width: 112px; }
+.table-scroll th:first-child, .table-scroll td:first-child { min-width: 92px; }
+.table-help { display: none; }
+.callout { border-left: 3px solid var(--primary); padding: 2px 0 2px 18px; margin: 20px 0; }
+.callout p:last-child { margin-bottom: 0; }
+.mono-block { font: .8rem/1.75 var(--mono); border: 1px solid var(--line); background: var(--wash); padding: 16px; margin-block: 18px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.checklist { list-style: none; padding: 0; }
+.checklist li { padding: 9px 0 9px 24px; border-bottom: 1px solid var(--line); position: relative; font-size: .85rem; }
+.checklist li::before { content: ""; width: 11px; height: 11px; border: 1px solid #62766a; position: absolute; left: 0; top: 16px; }
+.sources { font-size: .8rem; }
+.sources li { margin: 12px 0; }
+.sources a { overflow-wrap: anywhere; }
+.document-footer { border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 2rem; padding-top: 22px; padding-bottom: 28px; font-size: .75rem; color: var(--muted); }
+.document-footer p { margin: 0; }
+.footer-slogan { color: var(--ink); font-weight: 500; }
+@media (max-width: 1000px) {
+  .document-header, .layout, .document-footer { padding-inline: 32px; }
+  .layout { grid-template-columns: 180px minmax(0,1fr); gap: 34px; }
+}
+@media (max-width: 760px) {
+  .document-header, .layout, .document-footer { padding-inline: 22px; }
+  .document-header { padding-top: 24px; padding-bottom: 24px; }
+  .brand-logo { width: 140px; }
+  .brand-line { gap: 20px; }
+  .document-kind { font-size: .68rem; }
+  .document-kind strong { font-size: .75rem; }
+  .layout { display: block; }
+  .contents { position: static; padding: 24px 0; border-bottom: 1px solid var(--line); }
+  .contents ol { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); column-gap: 18px; }
+  .contents a { font-size: .75rem; }
+  .contents .utility { margin-top: 14px; margin-bottom: 0; }
+  main { padding-top: 28px; }
+  h1 { font-size: clamp(2rem, 6.5vw, 2.8rem); }
+  h2 { font-size: 1.22rem; gap: 8px; }
+  .subtitle { font-size: 1rem; }
+  .two-col { grid-template-columns: 1fr; gap: 8px; }
+  .table-help { display: block; color: var(--muted); font-size: .7rem; margin-top: -10px; }
+  .document-footer { flex-direction: column; gap: 10px; }
+}
+@media (max-width: 400px) {
+  .meta { grid-template-columns: 1fr; gap: 13px; }
+  .contents ol { display: block; }
+  .brand-logo { width: 126px; }
+}
+@page { size: A4; margin: 17mm 17mm 19mm; }
+@media print {
+  :root { --ink: #000; --muted: #4b5563; --line: #b2b8c2; --wash: #f3f4f6; }
+  body { font-size: 9.25pt; line-height: 1.48; background: white; }
+  .document-header, .layout, .document-footer { max-width: none; padding: 0; }
+  .document-header { padding-bottom: 6mm; margin-bottom: 8mm; }
+  .brand-logo { width: 39mm; }
+  .document-kind, .document-kind strong { font-size: 8pt; }
+  .layout { display: block; }
+  .contents, .skip-link, .screen-only, .table-help { display: none !important; }
+  main { padding: 0; }
+  .cover { padding-bottom: 6mm; }
+  h1 { font-size: 29pt; margin-bottom: 4mm; }
+  .subtitle { font-size: 11pt; margin-bottom: 5mm; max-width: none; }
+  .meta { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 3mm 7mm; }
+  .meta dt, .label { font-size: 6.8pt; }
+  .meta dd { font-size: 8.3pt; }
+  .status-line { font-size: 8pt; margin-bottom: 4mm; }
+  .status { font-size: 7pt; }
+  section { padding-top: 6mm; }
+  .print-break { break-before: page; padding-top: 0; }
+  h2 { font-size: 15pt; gap: 3mm; margin-bottom: 3.5mm; break-after: avoid; }
+  h2 .number { font-size: 8pt; flex-basis: 7mm; }
+  h3 { font-size: 10pt; margin-top: 4.5mm; margin-bottom: 2mm; break-after: avoid; }
+  p { margin-bottom: 3mm; orphans: 3; widows: 3; }
+  .statement { font-size: 10.5pt; }
+  .guide, .sources, .author-note { font-size: 8pt; }
+  .author-note { margin-top: 5mm; padding: 3mm 4mm; break-inside: avoid; }
+  .two-col { gap: 7mm; }
+  .placeholder { padding-bottom: 3mm; margin-bottom: 4mm; }
+  .table-scroll { overflow: visible; margin: 4mm 0; }
+  table { font-size: 8pt; line-height: 1.4; table-layout: fixed; }
+  caption { font-size: 7pt; margin-bottom: 2mm; }
+  th { font-size: 7.3pt; }
+  th, td { padding: 2.5mm 2mm; min-width: 0 !important; }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  .callout { padding-left: 4mm; margin: 4mm 0; break-inside: avoid; }
+  .mono-block { font-size: 8pt; padding: 3mm; break-inside: avoid; }
+  .checklist li { font-size: 8.5pt; padding-block: 2mm; break-inside: avoid; }
+  .checklist li::before { top: 3.2mm; }
+  .document-footer { margin-top: 8mm; padding-top: 4mm; font-size: 7.5pt; break-inside: avoid; }
+  a { color: inherit; text-decoration: underline; }
+  .print-url::after { content: " (" attr(href) ")"; font-size: 7pt; overflow-wrap: anywhere; }
+}
+
+</style>
+
+<style>
+.layout { display:block; max-width:1056px; }
+.document-header,.document-footer { max-width:1056px; }
+.document-header { padding-top:25px; padding-bottom:20px; }
+.brand-logo { width:138px; }
+.cover { padding-bottom:25px; }
+h1 { font-size:clamp(2rem,4.6vw,3.25rem); max-width:18ch; }
+h2 { display:block; }
+.subtitle { max-width:70ch; }
+.metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin:24px 0; }
+.metric { background:#f3f4f6; border-top:3px solid #05A451; padding:15px; }
+.metric strong { display:block; font-size:2rem; line-height:1.2; }
+.metric span { display:block; font-size:.8rem; color:#4b5563; margin-top:5px; }
+.terminal { background:#111318; color:#f0f3f6; padding:20px; border-radius:8px; font:.74rem/1.8 var(--mono); white-space:pre-wrap; overflow-wrap:anywhere; }
+.proof-hash { font:.76rem/1.6 var(--mono); overflow-wrap:anywhere; }
+.step-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+.step-grid h3 { margin-top:0; }
+.evidence-label { font-size:.75rem; color:#4b5563; }
+@media(max-width:600px){ .metrics { grid-template-columns:repeat(2,minmax(0,1fr)); } .step-grid { display:block; } .terminal { font-size:.68rem; padding:13px; } .document-header,.layout,.document-footer { padding-inline:20px; } }
+@media print { body { font-size:8.7pt; } .document-header,.layout,.document-footer { max-width:none; padding:0; } .document-header { padding-bottom:4mm; margin-bottom:4mm; } main { padding:0; } .cover { padding-bottom:3mm; } .subtitle { font-size:10pt; margin-bottom:3mm; } .meta { gap:2mm 7mm; } .status-line { margin-bottom:3mm; } section { padding-top:4mm; } .metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:3mm; margin:4mm 0; } .metric { padding:3mm; } .metric strong { font-size:19pt; } .metric span { font-size:7pt; } .terminal { font-size:6.2pt; line-height:1.4; padding:3mm; break-inside:avoid; } .proof-hash { font-size:7pt; } .step-grid { display:block; } .print-page { break-before:auto; } h1 { font-size:27pt; max-width:none; margin-bottom:3mm; } .document-footer { margin-top:4mm; padding-top:3mm; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to document</a>
+<header class="document-header"><div class="brand-line"><img class="brand-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDEwIDgzNSIgd2lkdGg9IjI0MTAiIGhlaWdodD0iODM1Ij48cGF0aCBmaWxsPSIjMDVBNDUxIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik01MTUuMDEgNjMxLjI1IEM1MDkuMzAgNjI4LjM5IDUwOC45NCA2MjYuNzMgNTA5LjIzIDYwNS4zNSBDNTA5LjUzIDU4My44NCA1MDkuNzkgNTgzLjA0IDUxNy4wNyA1ODAuODYgQzUyMS40OSA1NzkuNTQgNTI1LjI5IDU4MC4yOSA1MjguMDMgNTgzLjAzIEM1MjkuODYgNTg0Ljg2IDUzMC4wMCA1ODYuNDAgNTI5Ljk4IDYwNS4yNSBDNTI5Ljk1IDYyNy42MiA1MjkuODMgNjI4LjExIDUyMy4zMCA2MzEuMzkgQzUxOS4zMyA2MzMuMzggNTE5LjI3IDYzMy4zOCA1MTUuMDEgNjMxLjI1IFogTTMxMy43OCA2MzAuNDQgQzMxMi4yOCA2MjkuNjMgMzEwLjU2IDYyOC4wNCAzMDkuOTYgNjI2LjkyIEMzMDguMzkgNjI0LjAwIDMwNy41OSA1OTMuMjQgMzA4Ljk1IDU4OC4yMCBDMzExLjE0IDU4MC4wNSAzMjAuOTUgNTc3LjM4IDMyNy41MiA1ODMuMTYgTDMzMS4xMiA1ODYuMzEgTDMzMC45NiA2MDMuNDEgQzMzMC44NyA2MTIuODEgMzMwLjM3IDYyMi4yMSAzMjkuODUgNjI0LjMwIEMzMjguMjAgNjMwLjg2IDMyMC4xOSA2MzMuOTIgMzEzLjc4IDYzMC40NCBaIE0zODAuMzEgNjMwLjA1IEMzNzUuODEgNjI3LjMwIDM3NS4wMSA2MjMuMzEgMzc1LjAxIDYwMy4zNiBMMzc1LjAwIDU4Ni4yMSBMMzc3LjkwIDU4My4xMSBDMzgxLjIzIDU3OS41NCAzODYuMDggNTc4Ljk2IDM5MS4wMyA1ODEuNTIgQzM5Ni4yNCA1ODQuMjEgMzk3LjAwIDU4Ny4xOCAzOTYuOTggNjA0LjcwIEMzOTYuOTUgNjIyLjY5IDM5NS42NSA2MjcuNTggMzkwLjEzIDYzMC40MyBDMzg2LjE3IDYzMi40OCAzODQuMTggNjMyLjQwIDM4MC4zMSA2MzAuMDUgWiBNNDQ0LjQwIDYyOC42MCBMNDQxLjAwIDYyNS4yMCBMNDQxLjAwIDYxMS43NSBDNDQxLjAwIDU4NC42MiA0NDIuMzYgNTgxLjAwIDQ1Mi41MyA1ODEuMDAgQzQ1Ny40MSA1ODEuMDAgNDU4LjU0IDU4MS4zOSA0NjEuMDggNTgzLjkyIEw0NjQuMDAgNTg2Ljg1IEw0NjQuMDAgNjAzLjk2IEM0NjQuMDAgNjIyLjIyIDQ2My4zMCA2MjUuNzggNDU4LjkyIDYyOS44NiBDNDU3LjI5IDYzMS4zOCA0NTUuMzQgNjMyLjAwIDQ1Mi4yMSA2MzIuMDAgQzQ0OC41MyA2MzIuMDAgNDQ3LjI0IDYzMS40NCA0NDQuNDAgNjI4LjYwIFogTTI5Ni44MyA1NzUuODkgQzI4Ny44OSA1NzQuOTggMjgxLjY0IDU3MS45MCAyNzMuMDAgNTY0LjE2IEMyNjIuNTYgNTU0LjgxIDI1OS4xMiA1NDUuNzQgMjU5LjAzIDUyNy4zMyBDMjU4Ljk4IDUxNy43NiAyNTguNTQgNTE3LjQ1IDI1My4xMSA1MjMuMDggTDI0OC4zNyA1MjguMDAgTDIzMS4yMCA1MjguMDAgQzIxNy43MCA1MjguMDAgMjEzLjE4IDUyNy42NSAyMDkuOTggNTI2LjM4IEMyMDUuNTYgNTI0LjYxIDIwMy4wMCA1MjAuOTAgMjAzLjAwIDUxNi4yNyBDMjAzLjAwIDUwOC40NiAyMDkuMzEgNTA2LjE4IDIzMS44NiA1MDUuODQgTDI0OC4yMiA1MDUuNTkgTDI1Mi43MiA1MTAuMzUgQzI1NS4xOSA1MTIuOTcgMjU3LjQwIDUxNC45MyAyNTcuNjIgNTE0LjcxIEMyNTguNDQgNTEzLjg5IDI1OC40NyAzMjQuMTQgMjU3LjY1IDMyMy4zMyBDMjU3LjE5IDMyMi44OCAyNTUuNDkgMzI0LjA3IDI1My44NyAzMjYuMDAgTDI1MC45NCAzMjkuNTAgTDIzMy4yNCAzMjkuODIgQzIxMi40NSAzMzAuMTkgMjEwLjE0IDMyOS44NyAyMDYuMDcgMzI2LjA3IEMyMDIuNTkgMzIyLjgyIDIwMi4wNSAzMTguNzQgMjA0LjQ3IDMxNC4wNiBDMjA2LjcyIDMwOS43MSAyMTAuNDEgMzA5LjAwIDIzMC43MSAzMDkuMDAgQzI0OS42MSAzMDkuMDAgMjUyLjE3IDMwOS40NCAyNTQuODIgMzEzLjE4IEMyNTUuNTQgMzE0LjIwIDI1Ni40OSAzMTQuODIgMjU2LjkyIDMxNC41NSBDMjU3LjM0IDMxNC4yOSAyNTguMDAgMzA4Ljk5IDI1OC4zOCAzMDIuNzkgQzI1OS4xOSAyODkuMzIgMjYwLjE1IDI4NS4zNiAyNjMuOTUgMjc5LjczIEMyNjcuMzkgMjc0LjY0IDI3Ny4wOSAyNjUuMjcgMjgyLjEwIDI2Mi4yMiBDMjg5LjcxIDI1Ny41OCAyOTMuODkgMjU3LjQyIDM5OS41MCAyNTcuNjggQzUzMi4zNiAyNTguMDEgNTQ3LjYwIDI1OC4yNiA1NTIuMDAgMjYwLjE5IEM1NTguMzEgMjYyLjk1IDU2Ny45OSAyNzEuMDggNTcxLjQ4IDI3Ni41MyBDNTc3Ljg2IDI4Ni41MSA1NzguNzcgMjkxLjY3IDU3OC41NSAzMTYuNTAgQzU3OC40NCAzMjguNjAgNTc4LjcxIDM1NC43MCA1NzkuMTUgMzc0LjUwIEM1NzkuNjIgMzk1LjUyIDU3OS41NiA0MTcuOTkgNTc5LjAxIDQyOC41MCBDNTc4LjQ4IDQzOC41OCA1NzguNDAgNDU4LjYwIDU3OC44MiA0NzQuMDAgQzU3OS44NCA1MTEuMzEgNTc4Ljg1IDUzOC40NiA1NzYuMTggNTQ2LjgxIEM1NzQuMjEgNTUyLjkyIDU2OS44MCA1NTkuNDEgNTYzLjU1IDU2NS4zNyBDNTU5LjMzIDU2OS4zOSA1NTAuODcgNTc0LjY1IDU0Ny40MSA1NzUuNDEgQzU0My4xMCA1NzYuMzQgMzA1Ljc5IDU3Ni44MCAyOTYuODMgNTc1Ljg5IFogTTIwMDIuMDAgNTU0LjAzIEMxOTgyLjg4IDU1My41NyAxOTc4LjgyIDU1My4yMCAxOTc1LjAwIDU1MS41NyBDMTk2My44MCA1NDYuODEgMTk1Ny4xOSA1NDAuMTQgMTk1Mi4yNSA1MjguNjQgTDE5NDkuMDAgNTIxLjA3IEwxOTQ5LjAwIDUwMi44OCBMMTk0OS4wMCA0ODQuNjkgTDE5NTIuMTEgNDc4LjEwIEMxOTU1Ljc4IDQ3MC4yOSAxOTYyLjM4IDQ2Mi4yNCAxOTY4LjQ0IDQ1OC4xNCBDMTk3Ny40MCA0NTIuMTAgMTk3OS4yNCA0NTEuOTIgMjAzMS4xNyA0NTIuMDQgQzIwNjkuMjYgNDUyLjEzIDIwNzguNDUgNDUxLjg5IDIwNzkuMTMgNDUwLjgyIEMyMDgwLjMyIDQ0OC45NCAyMDgwLjIwIDQzNi4yNCAyMDc4Ljk2IDQzMy45MyBDMjA3OC4zOSA0MzIuODcgMjA3NS41OCA0MzAuNzkgMjA3Mi43MSA0MjkuMzIgTDIwNjcuNTAgNDI2LjY0IEwyMDE4LjUxIDQyNi4wNyBMMTk2OS41MiA0MjUuNTAgTDE5NjguNDUgNDIzLjAwIEMxOTY3Ljc2IDQyMS4zOCAxOTY3LjU4IDQxNC45NiAxOTY3Ljk0IDQwNC43OCBDMTk2OC40MSAzOTEuNDkgMTk2OC43OCAzODguNzkgMTk3MC4yOSAzODcuMjggQzE5NzEuOTcgMzg1LjYxIDE5NzUuMzggMzg1LjUyIDIwMjYuMjkgMzg1LjgyIEMyMDc3LjMyIDM4Ni4xMiAyMDgwLjkxIDM4Ni4yNiAyMDg3LjUwIDM4OC4xOCBDMjA5Ny43MiAzOTEuMTUgMjEwMi40NyAzOTMuODEgMjEwOC45MSA0MDAuMTcgQzIxMTMuNDIgNDA0LjYyIDIxMTUuMjUgNDA3LjQwIDIxMTcuNDUgNDEzLjE3IEMyMTIwLjE0IDQyMC4yMyAyMTIwLjI4IDQyMS41MCAyMTIxLjIwIDQ0Ny41MCBDMjEyMS43MiA0NjIuMzUgMjEyMS44NyA0ODguMTEgMjEyMS41NCA1MDQuNzQgTDIxMjAuOTMgNTM0Ljk4IEwyMTI0LjAwIDU0MS4zNCBDMjEyNi40OCA1NDYuNDkgMjEyNi44OCA1NDguMTkgMjEyNi4wOSA1NTAuMjUgQzIxMjUuNTYgNTUxLjY2IDIxMjQuNzYgNTUzLjAzIDIxMjQuMzEgNTUzLjMxIEMyMTIzLjg3IDU1My41OCAyMTE2LjM4IDU1NC4xNCAyMTA3LjY4IDU1NC41NCBMMjA5MS44NiA1NTUuMjcgTDIwODcuMDQgNTUwLjE0IEMyMDg0LjM4IDU0Ny4zMSAyMDgxLjc1IDU0NS4wMCAyMDgxLjE4IDU0NS4wMCBDMjA4MC42MiA1NDUuMDAgMjA3OC44OCA1NDYuMDQgMjA3Ny4zMyA1NDcuMzIgQzIwNzUuNzcgNTQ4LjU5IDIwNzIuNDcgNTUwLjczIDIwNzAuMDAgNTUyLjA3IEMyMDY1LjY2IDU1NC40MSAyMDY0Ljc4IDU1NC41MCAyMDQ1LjAwIDU1NC41NCBDMjAzMy43MiA1NTQuNTYgMjAxNC4zOCA1NTQuMzMgMjAwMi4wMCA1NTQuMDMgWiBNMjE2My42OCA1NTEuNzUgQzIxNjEuNDcgNTQ5LjUzIDIxNjEuNDQgNTQ5LjExIDIxNjEuMTQgNTE2LjUwIEMyMTYwLjk3IDQ5OC4zNSAyMTYxLjE2IDQ2My43OCAyMTYxLjU2IDQzOS42OCBDMjE2Mi4xNSA0MDMuNzMgMjE2Mi41NCAzOTUuNjAgMjE2My43MSAzOTQuNDMgQzIxNjQuODUgMzkzLjI5IDIxNjkuMDQgMzkzLjAwIDIxODQuNDIgMzkzLjAwIEMyMjAyLjAyIDM5My4wMCAyMjAzLjg0IDM5My4xNiAyMjA1LjM5IDM5NC44OCBDMjIwNi45NyAzOTYuNjIgMjIwNy4wOSA0MDIuNTUgMjIwNy4wNCA0NzMuMDYgQzIyMDcuMDAgNTM5LjU3IDIyMDYuODAgNTQ5LjY2IDIyMDUuNDcgNTUxLjY4IEMyMjAzLjk3IDU1My45NyAyMjAzLjcyIDU1NC4wMCAyMTg0LjkzIDU1NC4wMCBDMjE2Ni41MyA1NTQuMDAgMjE2NS44NCA1NTMuOTMgMjE2My42OCA1NTEuNzUgWiBNNTA4LjA5IDU0NS4xNCBMNTMyLjY5IDU0NC41MCBMNTM3LjM4IDU0MC42NiBDNTM5Ljk2IDUzOC41NCA1NDMuMzUgNTM0LjU2IDU0NC45MyA1MzEuODAgTDU0Ny43OSA1MjYuODAgTDU0Ny45MyA0NDYuMjUgQzU0OC4wMSA0MDEuOTQgNTQ4LjI1IDM2NS40MSA1NDguNDcgMzY1LjA1IEM1NDguNjkgMzY0LjcwIDU0OC40OSAzNTEuNTQgNTQ4LjAzIDMzNS44MSBDNTQ3LjI5IDMxMC44NyA1NDYuOTQgMzA2LjY1IDU0NS4yNSAzMDIuODUgQzU0Mi43NyAyOTcuMjYgNTM2LjMwIDI5MS40NSA1MzAuODEgMjg5Ljg4IEM1MjcuNTEgMjg4LjkzIDUwMS4xNSAyODguNjYgNDE4LjUwIDI4OC43MSBDMjk2LjAxIDI4OC43NyAzMDUuNzAgMjg4LjA5IDI5Ny41MSAyOTcuMjAgQzI5NS4wNCAyOTkuOTQgMjkyLjU5IDMwMy44MyAyOTIuMDUgMzA1Ljg0IEMyOTEuNTAgMzA3LjkwIDI5MS4wMCAzMjcuNjYgMjkwLjkxIDM1MS4wMCBDMjkwLjgzIDM3My44MiAyOTAuNzIgMzkzLjg1IDI5MC42OCAzOTUuNTAgQzI5MC42MyAzOTcuMTUgMjkwLjY5IDQyNy43OSAyOTAuODAgNDYzLjU4IEwyOTEuMDAgNTI4LjY2IEwyOTMuOTUgNTMzLjA4IEMyOTUuNTggNTM1LjUxIDI5OS4yNCA1MzkuMDggMzAyLjA5IDU0MS4wMCBMMzA3LjI3IDU0NC41MCBMMzUwLjg5IDU0NS4wMyBDNDE1Ljg3IDU0NS44MiA0ODAuMzkgNTQ1Ljg3IDUwOC4wOSA1NDUuMTQgWiBNNTg5Ljc3IDUyNy4yOSBDNTg0LjE0IDUyNi40MyA1ODEuMTYgNTE4LjE0IDU4NC4xMyA1MTEuNjEgQzU4Ni4xNSA1MDcuMTkgNTg5Ljg3IDUwNi40NyA2MDguOTQgNTA2LjgyIEM2MjcuMzkgNTA3LjE2IDYzMC4zNiA1MDcuODEgNjMzLjQ0IDUxMi4yMiBDNjM2LjE0IDUxNi4wNyA2MzUuNDAgNTE5LjgzIDYzMS4xMiA1MjQuMTIgTDYyNy4yNCA1MjguMDAgTDYwOS44NyA1MjcuODUgQzYwMC4zMiA1MjcuNzcgNTkxLjI3IDUyNy41MSA1ODkuNzcgNTI3LjI5IFogTTIwNzUuMzQgNTEyLjg5IEMyMDc4Ljk1IDUxMS4yNSAyMDgwLjAwIDUwNy45MCAyMDgwLjAwIDQ5OC4xMSBDMjA4MC4wMCA0ODQuNTggMjA4My42NCA0ODUuNTYgMjAzNi43NiA0ODYuNDEgTDE5OTcuNTAgNDg3LjEyIEwxOTk0Ljc4IDQ4OS44MSBDMTk4OS44OCA0OTQuNjcgMTk5MC4yMCA1MTEuMzEgMTk5NS4yMyA1MTMuMzMgQzE5OTcuOTQgNTE0LjQyIDIwNzIuODggNTE0LjAxIDIwNzUuMzQgNTEyLjg5IFogTTM1OC41MCA1MDcuMDMgQzM0NS43MCA1MDYuMzYgMzQzLjA1IDUwNS41MSAzMzcuMzUgNTAwLjIyIEMzMzAuMDggNDkzLjQ3IDMzMC41NCA0OTguODIgMzMwLjE4IDQxNi43MSBMMzI5Ljg1IDM0Mi45MyBMMzMyLjQxIDMzOC41NyBDMzM1LjQ0IDMzMy4zOSAzMzkuOTggMzI5LjM2IDM0NS42MCAzMjYuODYgQzM0OS40NiAzMjUuMTUgMzUzLjgwIDMyNS4wNiA0MjAuMTAgMzI1LjMzIEM0NzQuNjUgMzI1LjU2IDQ5MS4wMyAzMjUuOTEgNDkyLjg0IDMyNi45MCBDNDk3LjA3IDMyOS4xOSA1MDMuMTEgMzM1LjI5IDUwNS4xOCAzMzkuMzYgQzUwNy4xNyAzNDMuMjUgNTA3LjI0IDM0NS4yNiA1MDcuNjAgNDEzLjQzIEM1MDguMDIgNDkyLjY4IDUwOC4xOCA0OTAuNTkgNTAwLjc1IDQ5OC42NSBDNDk0LjYyIDUwNS4zMCA0OTIuMzkgNTA2LjExIDQ3Ny41OCA1MDcuMDcgQzQ2Mi43OSA1MDguMDIgMzc2LjgxIDUwOC4wMCAzNTguNTAgNTA3LjAzIFogTTQ3MS44MCA0NzEuNjMgQzQ3My4zNSA0NzAuMDggNDczLjUyIDQ2NS4yMiA0NzMuNzcgNDE2LjExIEM0NzQuMDMgMzY2LjczIDQ3My45MSAzNjIuMTcgNDcyLjM3IDM2MC44OSBDNDY5LjgyIDM1OC43OCAzNjcuNjQgMzU4LjkzIDM2NS41MiAzNjEuMDUgQzM2NC4zMCAzNjIuMjcgMzY0LjA3IDM3MC42MiAzNjQuMDAgNDE0LjUwIEMzNjMuOTUgNDQzLjEwIDM2My45MyA0NjcuNDggMzYzLjk2IDQ2OC42OCBDMzYzLjk4IDQ2OS44OCAzNjQuNzcgNDcxLjYyIDM2NS43MSA0NzIuNTYgQzM2Ny4yOCA0NzQuMTQgMzcxLjMyIDQ3NC4yMyA0MTguNzUgNDczLjgwIEM0NjUuMzcgNDczLjM3IDQ3MC4yNSA0NzMuMTcgNDcxLjgwIDQ3MS42MyBaIE0yMTAuMzEgNDYwLjkwIEMyMDYuNzUgNDU5Ljg3IDIwMy4wMCA0NTUuMzMgMjAzLjAwIDQ1Mi4wNSBDMjAzLjAwIDQ0OC42OSAyMDUuNzcgNDQ0LjE3IDIwOC43NyA0NDIuNjIgQzIxMi44NCA0NDAuNTIgMjQ4LjAxIDQzOS45MyAyNTAuNDEgNDQxLjkzIEMyNTMuMDYgNDQ0LjEyIDI1NS4wMCA0NDguNTQgMjU1LjAwIDQ1Mi4zNyBDMjU1LjAwIDQ2MS4xNCAyNTIuNzUgNDYyLjAyIDIzMC44MCA0NjEuOTEgQzIyMS4yOCA0NjEuODYgMjEyLjA2IDQ2MS40MCAyMTAuMzEgNDYwLjkwIFogTTU5My41MiA0NjEuMTkgQzU4NS42MyA0NjAuNzkgNTg0LjAwIDQ1OS4yOCA1ODQuMDAgNDUyLjM5IEM1ODQuMDAgNDQ2LjUzIDU4NS40MyA0NDIuNDkgNTg3Ljg5IDQ0MS4zOSBDNTg4Ljc3IDQ0MC45OSA1OTcuOTQgNDQwLjQ3IDYwOC4yNiA0NDAuMjMgTDYyNy4wMiA0MzkuNzggTDYzMS4wMSA0NDMuNzcgQzYzNi4zMiA0NDkuMDkgNjM2LjQ4IDQ1My4xNyA2MzEuNTYgNDU3Ljk0IEw2MjguMTIgNDYxLjI4IEw2MTMuODEgNDYxLjM5IEM2MDUuOTQgNDYxLjQ1IDU5Ni44MSA0NjEuMzYgNTkzLjUyIDQ2MS4xOSBaIE0yMDkuNDUgMzk0LjYzIEMyMDAuMjYgMzkwLjUzIDIwMS4xNCAzNzcuNzIgMjEwLjgwIDM3NS4wNCBDMjEyLjgzIDM3NC40NyAyMjIuMDYgMzc0LjAxIDIzMS4zMSAzNzQuMDEgTDI0OC4xMSAzNzQuMDAgTDI1MS4wMCAzNzcuMTYgQzI1Ny4wNiAzODMuNzkgMjU3LjI4IDM4OS4yMiAyNTEuNjggMzkzLjQwIEMyNDkuMDkgMzk1LjMzIDI0Ny4zOCAzOTUuNTIgMjMwLjY4IDM5NS43NCBDMjE3LjA4IDM5NS45MiAyMTEuNzMgMzk1LjY0IDIwOS40NSAzOTQuNjMgWiBNNTg2LjgwIDM5NC44MCBDNTgxLjI1IDM5MC41NyA1ODIuMjIgMzc3LjUwIDU4OC4yNCAzNzUuMzMgQzU4OS40OCAzNzQuODggNTk5LjA1IDM3NC42MiA2MDkuNTAgMzc0Ljc2IEw2MjguNTAgMzc1LjAxIEw2MzEuNzUgMzc4LjQ5IEM2MzUuOTkgMzgzLjAzIDYzNi4xMCAzODcuMjYgNjMyLjExIDM5Mi4wNCBMNjI5LjIyIDM5NS41MCBMNjA4Ljg2IDM5NS44MCBDNTkzLjMxIDM5Ni4wMyA1ODguMTAgMzk1Ljc5IDU4Ni44MCAzOTQuODAgWiBNMjE2Ny4yOCAzNzIuNjkgQzIxNjYuMDUgMzcyLjAxIDIxNjMuOTEgMzY5LjkyIDIxNjIuNTMgMzY4LjAzIEMyMTYwLjE1IDM2NC44MSAyMTYwLjAwIDM2My45MCAyMTYwLjAwIDM1Mi4yOCBMMjE2MC4wMCAzMzkuOTYgTDIxNjUuMzIgMzM0LjQ2IEwyMTcwLjY1IDMyOC45NyBMMjE4NC4xNiAzMjkuMzEgTDIxOTcuNjggMzI5LjY1IEwyMjAxLjc4IDMzMi45NSBDMjIwNC4wNCAzMzQuNzYgMjIwNi4zMSAzMzcuNDQgMjIwNi44MiAzMzguOTEgQzIyMDcuNzEgMzQxLjQ3IDIyMDcuNDUgMzU4LjA0IDIyMDYuNDAgMzY0Ljc4IEMyMjA2LjA0IDM2Ny4xNyAyMjA0Ljc4IDM2OC44NyAyMjAxLjgwIDM3MS4wMyBDMjE5Ny43MSAzNzMuOTkgMjE5Ny42NyAzNzQuMDAgMjE4My42MCAzNzMuOTYgQzIxNzQuMzMgMzczLjk0IDIxNjguNzQgMzczLjUxIDIxNjcuMjggMzcyLjY5IFogTTU4Ni4wMiAzMjcuMzEgQzU4NC4xNSAzMjQuOTQgNTgzLjg3IDMyMy41NyA1ODQuMjMgMzE4LjYwIEM1ODQuOTAgMzA5LjIzIDU4NS42NiAzMDguOTAgNjA2LjMxIDMwOS4wNSBDNjI4LjQyIDMwOS4yMSA2MjkuNTMgMzA5LjQyIDYzMi41NiAzMTMuODcgQzYzNS44NSAzMTguNzIgNjM1LjYzIDMyMS4zNCA2MzEuNTggMzI1Ljc2IEw2MjguMTYgMzI5LjUwIEw2MDguMjAgMzI5LjgxIEw1ODguMjQgMzMwLjExIEw1ODYuMDIgMzI3LjMxIFogTTUxMy4yMSAyNTEuMjUgTDUwOS45OSAyNDguNTAgTDUwOS43NCAyMjcuNjkgTDUwOS41MCAyMDYuODcgTDUxMy4yNCAyMDMuNDQgQzUxOC4xNyAxOTguOTAgNTIxLjgwIDE5OC44NyA1MjYuNjcgMjAzLjMzIEM1MzAuODAgMjA3LjEyIDUzMC41NiAyMDUuMjQgNTMwLjIyIDIzMS4yNCBMNTMwLjAwIDI0Ny45OSBMNTI1Ljg1IDI1MC45OSBDNTIwLjcwIDI1NC43MyA1MTcuMzUgMjU0Ljc5IDUxMy4yMSAyNTEuMjUgWiBNMzEyLjg2IDI1MS40OCBDMzA4Ljg0IDI0OS4zMCAzMDguMDAgMjQ1LjI0IDMwOC4wMSAyMjguMTAgQzMwOC4wMSAyMTAuMjggMzA4LjgzIDIwNi4xNiAzMTMuMTEgMjAyLjU2IEMzMTcuODIgMTk4LjU5IDMyMi4yOSAxOTkuMDUgMzI3LjI1IDIwNC4wMSBMMzMxLjI2IDIwOC4wMyBMMzMwLjgxIDIyNi43NiBDMzMwLjUyIDIzOC42NCAzMjkuOTEgMjQ2LjMyIDMyOS4xNSAyNDcuNzQgQzMyNi41NyAyNTIuNTIgMzE4LjI3IDI1NC40MiAzMTIuODYgMjUxLjQ4IFogTTQ0NS4zMCAyNTEuMDQgQzQ0MC45OSAyNDguNDEgNDQwLjYzIDI0NS43NyA0NDEuNzAgMjI0LjQ3IEw0NDIuNTggMjA2Ljc0IEw0NDUuNTQgMjA0LjM4IEM0NDcuMTcgMjAzLjA3IDQ0OS45OSAyMDEuNzMgNDUxLjgxIDIwMS4zOCBDNDU0LjUzIDIwMC44NyA0NTUuNzggMjAxLjI4IDQ1OC43OSAyMDMuNzIgQzQ2My42MiAyMDcuNjIgNDY0LjE5IDIxMC43MyA0NjMuODEgMjMwLjgzIEw0NjMuNTAgMjQ3LjE3IEw0NjAuMjMgMjUwLjA4IEM0NTYuMjUgMjUzLjY0IDQ1MC4yMSAyNTQuMDMgNDQ1LjMwIDI1MS4wNCBaIE0zODEuMTggMjUwLjkxIEMzNzYuMDggMjQ5LjM3IDM3NS4yMSAyNDYuMDUgMzc1LjE2IDIyOC4wMCBDMzc1LjExIDIxMC42MyAzNzUuODEgMjA3LjE3IDM4MC4xNCAyMDMuNTMgQzM4NC4zOCAxOTkuOTcgMzg4LjE5IDIwMC4yMyAzOTIuNzYgMjA0LjQzIEwzOTYuNTAgMjA3Ljg1IEwzOTYuNTAgMjI3LjQwIEMzOTYuNTAgMjQ1LjYyIDM5Ni4zNiAyNDcuMDggMzk0LjUwIDI0OC45MyBDMzkyLjA4IDI1MS4zMyAzODUuNzEgMjUyLjI3IDM4MS4xOCAyNTAuOTEgWiIvPjxwYXRoIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTc5Mi40MCA1NTIuOTAgQzc5MC41NiA1NTAuODYgNzkwLjQ5IDU0Ny42NSA3OTAuMjYgNDU3LjE1IEM3OTAuMTMgNDA1LjY0IDc4OS44MCAzNjIuOTQgNzg5LjU0IDM2Mi4yNSBDNzg5LjE3IDM2MS4yOCA3NzkuNTUgMzYxLjAwIDc0Ni4xMCAzNjEuMDAgQzcyMS4zMSAzNjEuMDAgNzAyLjA3IDM2MC42MCA3MDAuNjMgMzYwLjA1IEM2OTkuMjUgMzU5LjUyIDY5Ny42NyAzNTguMjUgNjk3LjEyIDM1Ny4yMiBDNjk2LjU2IDM1Ni4xOCA2OTUuNzkgMzQ1LjY1IDY5NS40MSAzMzMuODIgQzY5NC43MiAzMTIuNjcgNjk0Ljc0IDMxMi4yNiA2OTYuODUgMzEwLjE1IEw2OTkuMDAgMzA4LjAwIEw4MTguMDAgMzA4LjAwIEw5MzcuMDAgMzA4LjAwIEw5MzkuMTQgMzEwLjE0IEM5NDEuMjIgMzEyLjIyIDk0MS4yNiAzMTIuNzkgOTQwLjc3IDMzNC43MiBDOTQwLjM0IDM1My45MCA5NDAuMDIgMzU3LjQxIDkzOC42MCAzNTguODMgQzkzNy4xMCAzNjAuMzMgOTMyLjE2IDM2MC41NSA4OTEuMjkgMzYxLjAwIEw4NDUuNjUgMzYxLjUwIEw4NDUuMjQgNDU2LjAwIEM4NDQuODkgNTM2LjAxIDg0NC42MSA1NTAuODQgODQzLjM5IDU1Mi43NSBDODQxLjk3IDU1NC45OCA4NDEuNzQgNTU1LjAwIDgxOC4xMyA1NTUuMDAgQzc5NS4xOCA1NTUuMDAgNzk0LjI0IDU1NC45MiA3OTIuNDAgNTUyLjkwIFogTTk3Ny4wNyA1NTIuMzcgQzk3NS4wMCA1NDkuNzMgOTc1LjAwIDU0OS42MSA5NzUuMDAgNDMwLjM5IEw5NzUuMDAgMzExLjA1IEw5NzcuNDAgMzA5LjQ3IEM5NzkuNDUgMzA4LjEzIDk4My4zMSAzMDcuOTQgMTAwMy44NSAzMDguMjAgQzEwMjEuNjQgMzA4LjQyIDEwMjguMjMgMzA4LjgzIDEwMjkuMTcgMzA5Ljc3IEMxMDMwLjE2IDMxMC43NiAxMDMwLjQ1IDMyMS4yOCAxMDMwLjQ3IDM1Ny4yNyBMMTAzMC41MCA0MDMuNTAgTDExMDUuMDAgNDAzLjUwIEwxMTc5LjUwIDQwMy41MCBMMTE3OS43NCAzNTcuNTAgQzExNzkuOTggMzEyLjAxIDExODAuMDEgMzExLjQ4IDExODIuMTAgMzA5Ljc1IEMxMTgzLjk4IDMwOC4yMCAxMTg2Ljc4IDMwOC4wMCAxMjA3LjAwIDMwOC4wMCBDMTIyNy4yMSAzMDguMDAgMTIzMC4wMiAzMDguMjAgMTIzMS45MiAzMDkuNzUgTDEyMzQuMDYgMzExLjUwIEwxMjM0LjE3IDQzMS4yNiBDMTIzNC4yOSA1NDUuMzAgMTIzNC4yMSA1NTEuMTIgMTIzMi40OSA1NTMuMDEgQzEyMzAuNzkgNTU0Ljg5IDEyMjkuMzggNTU1LjAwIDEyMDcuODAgNTU1LjAwIEwxMTg0LjkxIDU1NS4wMCBMMTE4Mi40NSA1NTIuNTUgTDExODAuMDAgNTUwLjA5IEwxMTgwLjAwIDUwNC4xNyBDMTE4MC4wMCA0NjYuMzYgMTE3OS43NiA0NTguMDQgMTE3OC42MiA0NTcuMTAgQzExNzYuNTkgNDU1LjQxIDEwMzIuMzggNDU1LjYxIDEwMzEuMjggNDU3LjMwIEMxMDMwLjg1IDQ1Ny45NiAxMDMwLjQ3IDQ3OS4zOCAxMDMwLjQzIDUwNC45MCBMMTAzMC4zNSA1NTEuMzAgTDEwMjguMDcgNTUzLjE1IEMxMDI1Ljk5IDU1NC44MyAxMDIzLjY3IDU1NS4wMCAxMDAyLjQ2IDU1NS4wMCBMOTc5LjE1IDU1NS4wMCBMOTc3LjA3IDU1Mi4zNyBaIE0xMzE3LjUwIDU1MS44NCBDMTMxMi45OCA1NDkuNTMgMTMwNy42NyA1NDQuOTIgMTI5NS45NyA1MzMuMTQgQzEyODcuNDMgNTI0LjU0IDEyNzkuMTkgNTE1Ljg1IDEyNzcuNjcgNTEzLjg0IEwxMjc0Ljg5IDUxMC4xNyBMMTI3NC43MCA0MzEuNjMgTDEyNzQuNTAgMzUzLjA4IEwxMjc5LjA4IDM0OC4yOSBDMTI4MS42MSAzNDUuNjYgMTI4Ny4wNiAzMzkuNDUgMTI5MS4xOSAzMzQuNTAgQzEyOTkuODkgMzI0LjEwIDEzMTEuNTAgMzEyLjg3IDEzMTYuMjMgMzEwLjI5IEMxMzE5LjI2IDMwOC42MyAxMzI1LjM5IDMwOC40NSAxNDAwLjAwIDMwNy44MiBDMTQ1My44OCAzMDcuMzYgMTQ4Mi4zMiAzMDcuNDggMTQ4Ni4wMCAzMDguMTcgQzE0OTUuMjYgMzA5LjkwIDE1MDQuNjIgMzE3LjU3IDE1MjAuNjkgMzM2LjU5IEMxNTIzLjk5IDM0MC40OSAxNTI3LjY1IDM0NC42NSAxNTI4Ljg0IDM0NS44NCBDMTUzMC4wMyAzNDcuMDMgMTUzMS4wMSAzNDguNTYgMTUzMS4wMiAzNDkuMjUgQzE1MzEuMDMgMzQ5Ljk0IDE1MzEuOTIgMzUxLjYyIDE1MzMuMDAgMzUzLjAwIEMxNTM0LjkwIDM1NS40MyAxNTM0Ljk2IDM1Ny42MSAxNTM0Ljk4IDQzMS42MCBMMTUzNS4wMCA1MDcuNzEgTDE1MzIuNzUgNTEwLjE3IEMxNTMxLjUxIDUxMS41MyAxNTI5LjM4IDUxNC4xNiAxNTI4LjAwIDUxNi4wMSBDMTUyNi42MiA1MTcuODcgMTUyMC44MyA1MjQuNzAgMTUxNS4xMiA1MzEuMTkgQzE1MDQuOTMgNTQyLjc5IDE0OTguNzUgNTQ4LjEyIDE0OTAuMjAgNTUyLjcwIEwxNDg1Ljg5IDU1NS4wMCBMMTQwNC43MCA1NTQuOTUgTDEzMjMuNTAgNTU0LjkwIEwxMzE3LjUwIDU1MS44NCBaIE0xNTU5Ljc1IDU1My44OSBDMTU1Ni44MiA1NTIuMjMgMTU1Ny40NSA1NDYuNTMgMTU2MC44MiA1NDQuMTIgQzE1NjIuMzggNTQzLjAyIDE1NjQuOTYgNTQwLjE4IDE1NjYuNTcgNTM3LjgxIEMxNTY4LjE4IDUzNS40NCAxNTcxLjUyIDUzMC45NiAxNTc0LjAwIDUyNy44NyBDMTU3Ni40NyA1MjQuNzcgMTU4MC4zOSA1MTkuNTkgMTU4Mi43MCA1MTYuMzcgQzE1ODUuMDAgNTEzLjE0IDE1OTAuODUgNTA1LjczIDE1OTUuNzAgNDk5Ljg5IEMxNjAwLjU0IDQ5NC4wNiAxNjA1LjYyIDQ4Ny43OCAxNjA3LjAwIDQ4NS45NSBDMTYwOS44MiA0ODIuMTggMTYxMy45NSA0NzcuMzMgMTYxOC4zMiA0NzIuNjYgQzE2MTkuOTQgNDcwLjkyIDE2MjIuNDUgNDY3LjkzIDE2MjMuODggNDY2LjAwIEMxNjI1LjMxIDQ2NC4wNyAxNjMxLjUzIDQ1Ni4zMiAxNjM3LjcwIDQ0OC43NiBDMTY0My44NyA0NDEuMjEgMTY0OS40MCA0MzQuMTIgMTY0OS45OSA0MzMuMDEgQzE2NTEuMjEgNDMwLjczIDE2NTAuMzQgNDI4LjUwIDE2NDYuNzMgNDI0LjcwIEMxNjQ1LjUwIDQyMy40MSAxNjQyLjAzIDQxOS4xMCAxNjM5LjAwIDQxNS4xMSBDMTYzNS45NyA0MTEuMTIgMTYzMS44MCA0MDUuOTggMTYyOS43MyA0MDMuNjggQzE2MjcuNjYgNDAxLjM4IDE2MjQuMDcgMzk3LjAyIDE2MjEuNzYgMzk0LjAwIEMxNjE5LjQ1IDM5MC45OCAxNjA4LjA4IDM3Ny4wMiAxNTk2LjUwIDM2My4wMCBDMTU4NC45MiAzNDguOTggMTU3My41MiAzMzQuOTUgMTU3MS4xNiAzMzEuODMgQzE1NjguODAgMzI4LjcwIDE1NjQuMjAgMzIzLjI0IDE1NjAuOTQgMzE5LjY3IEMxNTU0LjcyIDMxMi44OSAxNTUzLjg0IDMxMC42OSAxNTU2Ljc1IDMwOS4xMyBDMTU1Ny43MSAzMDguNjIgMTU3MS43OCAzMDguMDUgMTU4OC4wMCAzMDcuODcgQzE2MjEuNDcgMzA3LjUwIDE2MjAuNTEgMzA3LjMxIDE2MjcuMDAgMzE1LjcyIEMxNjI4LjkyIDMxOC4yMSAxNjMyLjc2IDMyMy4wMSAxNjM1LjUyIDMyNi4zOCBDMTYzOC4yOCAzMjkuNzQgMTY0MS44NSAzMzQuMzAgMTY0My40NiAzMzYuNTAgQzE2NDUuMDcgMzM4LjcwIDE2NDkuNTkgMzQ0LjMyIDE2NTMuNTAgMzQ5LjAwIEMxNjU3LjQxIDM1My42OCAxNjYzLjI4IDM2MS4wOSAxNjY2LjU1IDM2NS40OSBDMTY2OS44MiAzNjkuODggMTY3My4xNyAzNzQuMTkgMTY3NC4wMCAzNzUuMDYgQzE2NzQuODMgMzc1LjkzIDE2NzcuMDggMzc4LjU5IDE2NzkuMDAgMzgwLjk2IEMxNjg1LjQyIDM4OC44OCAxNjg3LjAyIDM4OS42OSAxNjg4Ljk3IDM4Ni4wNSBDMTY4OS41NSAzODQuOTcgMTY5My41MSAzNzkuODcgMTY5Ny43OSAzNzQuNzAgQzE3MDIuMDYgMzY5LjUzIDE3MDcuNTcgMzYyLjQ5IDE3MTAuMDMgMzU5LjA2IEMxNzEyLjQ5IDM1NS42MyAxNzE2LjIxIDM1MC45NSAxNzE4LjMxIDM0OC42NiBDMTcyMC40MCAzNDYuMzcgMTcyNC4wMCAzNDIuMDIgMTcyNi4zMCAzMzkuMDAgQzE3MzQuMzUgMzI4LjQxIDE3NTAuMTAgMzEwLjAyIDE3NTEuOTcgMzA5LjAxIEMxNzUzLjEzIDMwOC4zOSAxNzY1LjUxIDMwOC4wMCAxNzgzLjg2IDMwOC4wMCBDMTgwOS44MCAzMDguMDAgMTgxNC4wNyAzMDguMjEgMTgxNS40MyAzMDkuNTcgQzE4MTcuNjUgMzExLjc5IDE4MTcuMzggMzEzLjcwIDE4MTQuNTkgMzE1LjUzIEMxODEzLjI3IDMxNi40MCAxODA4LjQ0IDMyMS45MiAxODAzLjg3IDMyNy44MSBDMTc5OS4zMCAzMzMuNjkgMTc5MC4xMiAzNDUuMDIgMTc4My40NyAzNTMuMDAgQzE3NjYuNDcgMzczLjM5IDE3NTguMTQgMzgzLjU2IDE3NTIuNzYgMzkwLjUwIEMxNzUwLjIwIDM5My44MCAxNzQ2LjIzIDM5OC41MiAxNzQzLjk0IDQwMS4wMCBDMTc0MS42NCA0MDMuNDggMTczOC4wMiA0MDcuODUgMTczNS44OCA0MTAuNzIgQzE3MzMuNzMgNDEzLjU5IDE3MjkuMjkgNDE5LjE2IDE3MjUuOTkgNDIzLjA5IEMxNzIyLjcwIDQyNy4wMyAxNzIwLjAwIDQzMC41OCAxNzIwLjAwIDQzMS4wMCBDMTcyMC4wMCA0MzEuNDEgMTcyNC42NCA0MzcuMzIgMTczMC4zMSA0NDQuMTMgQzE3MzUuOTcgNDUwLjkzIDE3NDMuNTEgNDYwLjE4IDE3NDcuMDYgNDY0LjY4IEMxNzU0LjMzIDQ3My45MiAxNzczLjQ4IDQ5Ny40MSAxNzgzLjcwIDUwOS42NCBDMTc4Ny40NCA1MTQuMTIgMTc5NC4xMCA1MjIuMjEgMTc5OC41MCA1MjcuNjIgQzE4MDIuOTAgNTMzLjAzIDE4MDguNTggNTM5LjcyIDE4MTEuMTIgNTQyLjQ4IEMxODE2LjMzIDU0OC4xNCAxODE3Ljc1IDU1MS4zOSAxODE1Ljk2IDU1My41NSBDMTgxNC45NSA1NTQuNzYgMTgwOS43MCA1NTUuMDAgMTc4NC4yNSA1NTUuMDAgTDE3NTMuNzQgNTU1LjAwIEwxNzQ5LjYyIDU1MC43MiBDMTc0NS41MSA1NDYuNDUgMTcyNC45NyA1MjEuMzMgMTcxNy42NCA1MTEuNjEgQzE3MTUuNTIgNTA4LjgwIDE3MTMuMjcgNTA2LjA1IDE3MTIuNjMgNTA1LjUwIEMxNzExLjk5IDUwNC45NSAxNzA4LjgwIDUwMC45MCAxNzA1LjUzIDQ5Ni41MCBDMTY4OS44MyA0NzUuMzIgMTY4NC43MiA0NzAuOTIgMTY4MS45MiA0NzYuMTUgQzE2ODEuMjkgNDc3LjMzIDE2NzkuMzQgNDc5LjczIDE2NzcuNTkgNDgxLjQ4IEMxNjc1Ljg0IDQ4My4yMyAxNjcyLjQ4IDQ4Ny40OSAxNjcwLjEyIDQ5MC45NSBDMTY2Ny43NiA0OTQuNDEgMTY1OS4wNyA1MDUuNDAgMTY1MC44MiA1MTUuMzcgQzE2MzEuOTQgNTM4LjE5IDE2MzMuMTYgNTM2LjY4IDE2MjkuMTUgNTQyLjAwIEMxNjI3LjI5IDU0NC40OCAxNjIzLjkxIDU0OC40MiAxNjIxLjY2IDU1MC43NyBMMTYxNy41NSA1NTUuMDMgTDE1ODkuNTIgNTU0Ljk2IEMxNTczLjAwIDU1NC45MSAxNTYwLjc4IDU1NC40OCAxNTU5Ljc1IDU1My44OSBaIE0xODU3LjAzIDU1Mi41MiBDMTg1MC40NCA1NDcuNjYgMTg1MC4wMSA1NDYuMjIgMTg1MC4wMSA1MjguODYgTDE4NTAuMDAgNTEzLjIyIEwxODUzLjI1IDUwOS4xNyBDMTg1Ny44MiA1MDMuNDggMTg2MS43MSA1MDIuMTkgMTg3Ni43NiA1MDEuNDAgQzE4OTIuMzQgNTAwLjU4IDE4OTUuOTcgNTAxLjE2IDE5MDAuNTcgNTA1LjIwIEMxOTA2LjkyIDUxMC43NyAxOTA3LjM3IDUxMi41OCAxOTA2LjY1IDUyOS4zOSBDMTkwNS45MyA1NDUuOTYgMTkwNS4wMyA1NDguNzEgMTg5OS4wNSA1NTIuNzUgQzE4OTUuODkgNTU0Ljg3IDE4OTQuNzEgNTU1LjAwIDE4NzguMDUgNTU1LjAwIEMxODYwLjgyIDU1NS4wMCAxODYwLjMxIDU1NC45NCAxODU3LjAzIDU1Mi41MiBaIE0xNDcwLjQ4IDUwMS4wMSBDMTQ3Mi43NCA0OTkuOTIgMTQ3Ni4wMCA0OTcuNTUgMTQ3Ny43NCA0OTUuNzYgTDE0ODAuODkgNDkyLjUwIEwxNDgxLjAxIDQ1NC4wMCBDMTQ4MS4wOCA0MzIuODIgMTQ4MS4xMCA0MDUuNjkgMTQ4MS4wNyAzOTMuNjkgTDE0ODEuMDAgMzcxLjg4IEwxNDc1Ljg1IDM2Ni40NCBMMTQ3MC43MSAzNjEuMDAgTDE0MDUuMTYgMzYxLjAwIEwxMzM5LjYxIDM2MS4wMCBMMTMzNC4zNSAzNjYuNDQgTDEzMjkuMDggMzcxLjg3IEwxMzI5LjA3IDQzMi4xOSBMMTMyOS4wNSA0OTIuNTAgTDEzMzEuMjcgNDk1LjExIEMxMzMyLjUwIDQ5Ni41NSAxMzM0LjgzIDQ5OC41OCAxMzM2LjQ2IDQ5OS42MSBDMTMzOS4yNSA1MDEuMzkgMTM0Mi44NSA1MDEuNTMgMTQwMC45NiA1MDIuMDIgQzE0MzQuODAgNTAyLjMwIDE0NjMuMzcgNTAyLjY0IDE0NjQuNDMgNTAyLjc3IEMxNDY1LjUwIDUwMi44OSAxNDY4LjIyIDUwMi4xMCAxNDcwLjQ4IDUwMS4wMSBaIi8+PC9zdmc+" alt="THOX.ai" width="2410" height="835"><div class="document-kind"><strong>Engineering evidence</strong>Recorded local run · Public preview</div></div></header>
+<div class="layout"><main id="main-content" tabindex="-1">
+<header class="cover"><div class="status-line"><span class="status">LOCAL TEST PASSED</span><span>Azure deployment remains unverified.</span></div>
+<h1>ThoxInux kernel verification</h1>
+<p class="subtitle">The released v0.9.1 EFI booted twice under QEMU TCG. Controller checks, embedded-domain lifecycle commands and both clean shutdowns passed.</p>
+<dl class="meta"><div><dt>Recorded execution</dt><dd>2026-11-01, 22:37:58-22:38:19 CST (UTC-06:00)</dd></div><div><dt>Profile</dt><dd>Q35 / OVMF / 1 vCPU / 2 GiB / 48-bit IOMMU</dd></div><div><dt>Kernel release / banner</dt><dd>v0.9.1 / ThoxInux 0.9.0</dd></div><div><dt>Test state</dt><dd>Completed; both guest processes stopped cleanly</dd></div></dl>
+</header>
+<div class="metrics" aria-label="Observed verification counts"><div class="metric"><strong>2</strong><span>boots passed</span></div><div class="metric"><strong>8</strong><span>controller checks</span></div><div class="metric"><strong>22</strong><span>lifecycle commands</span></div><div class="metric"><strong>2</strong><span>clean shutdowns</span></div></div>
+<section id="recorded-output"><h2>Recorded headless workflow</h2>
+<p>The supervisor verified the unified kernel identity and ran <code>status</code>, <code>components</code>, <code>domain list</code> and <code>help</code> on each boot. The second boot reused the test state to check the recovered embedded domain.</p>
+<p class="evidence-label">Rendered text from the first 26 lines of <a href="https://github.com/Thox-ai/thoxinux-azure/blob/main/validation/portable-qemu/harness-console.log">harness-console.log</a>. This is actual recorded output, not an application screenshot.</p>
+<pre class="terminal">cold: released ThoxInux v0.9.1 boot and four controller checks passed
+cold: domain new azureprobe: passed
+cold: domain set azureprobe image=embedded://minimal-system-v0 init=/sbin/init memory-mib=128 autostart=false: passed
+cold: domain start azureprobe: passed
+cold: domain status azureprobe: passed
+cold: ps: passed
+cold: domain stop azureprobe: passed
+cold: domain status azureprobe: passed
+cold: domain start azureprobe: passed
+cold: domain status azureprobe: passed
+cold: domain restart azureprobe: passed
+cold: domain status azureprobe: passed
+cold: domain fail azureprobe: passed
+cold: domain status azureprobe: passed
+cold: domain start azureprobe: passed
+cold: domain status azureprobe: passed
+cold: domain stop azureprobe: passed
+cold: domain status azureprobe: passed
+cold: clean GINUX_KERNEL_OK shutdown passed
+recovered: released ThoxInux v0.9.1 boot and four controller checks passed
+recovered: domain status azureprobe: passed
+recovered: domain start azureprobe: passed
+recovered: domain status azureprobe: passed
+recovered: domain stop azureprobe: passed
+recovered: domain status azureprobe: passed
+recovered: clean GINUX_KERNEL_OK shutdown passed</pre>
+<div class="callout"><p><strong>Acceptance boundary.</strong> Actual local QEMU execution of the released kernel and embedded-domain lifecycle. Azure deployment, production service, native Hyper-V, a graphical desktop and MeshStack were not tested. Rootfs pending does not establish ready Rocky Linux or systemd userspace.</p></div></section>
+<section class="print-page" id="repeat"><h2>Repeat the real local test</h2>
+<p>Use a Linux host with Python 3.11 or newer. Install the packages below, then run the verifier from the repository root as an ordinary user. Use a new output directory; the verifier refuses root execution and existing output paths.</p>
+<pre class="mono-block">sudo apt-get update
+sudo apt-get install --yes qemu-system-x86 ovmf util-linux
+python3 tools/verify_kernel.py --output /tmp/thoxinux-proof-01</pre>
+<div class="step-grid"><div><h3>1. Verify pinned inputs</h3><p>The verifier downloads the v0.9.1 release assets, verifies their expected bytes and manifest, and checks the bundled upstream launcher before starting QEMU.</p></div><div><h3>2. Exercise the actual guest</h3><p>A temporary state directory holds two real boots, eight controller checks, 22 embedded-domain commands and clean shutdowns. Temporary processes are cleaned up.</p></div><div><h3>3. Inspect the saved proof</h3><p>Review <code>summary.json</code>, both lifecycle result files, running/stopped receipts, complete <code>serial.log</code> and supervisor logs in the selected output directory.</p></div><div><h3>4. Evaluate Azure separately</h3><p>Follow <a href="https://github.com/Thox-ai/thoxinux-azure/blob/main/docs/QUICKSTART.md">Quickstart</a> for the Azure deployment. The Azure acceptance extension must verify the live service and guest before that deployment can be accepted.</p></div></div>
+</section>
+<section id="provenance"><h2>Source and proof</h2>
+<p>The deployment package version and the kernel release are separate. The recorded EFI is v0.9.1; its actual banner remains <code>ThoxInux 0.9.0</code>. This preview does not certify a package release or cloud deployment.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Proof hashes"><table><caption>Hashes of the actual recorded inputs and output</caption><thead><tr><th scope="col">Artifact</th><th scope="col">SHA-256 / revision</th></tr></thead><tbody>
+<tr><td>Released GINUX.EFI</td><td class="proof-hash">1bc1c7af33470edc009fa5756d3fe6063573660e07e157d19397afc680a7bb89</td></tr>
+<tr><td>Complete serial log</td><td class="proof-hash">8e6fa0f40e9b02809132df99ca0363e43fc0aba83e7dbc41020220c3d5256ba9</td></tr>
+<tr><td>Harness console log</td><td class="proof-hash">5155517e3ad42f135c413f1b5292c7b05f5e7861d3371f4f31b0752ed7ab4d4b</td></tr>
+<tr><td>Tested portable verifier</td><td class="proof-hash">3825e4808a406c243ecbd8b3b2f85eefa0956edc34a84c0cb5720ef83e8fee71</td></tr>
+<tr><td>Kernel source commit</td><td class="proof-hash">fbad5952f20281ef6ad7eaefc1f54f7db4c0c6e9</td></tr>
+<tr><td>Raw UTC start / end</td><td class="proof-hash">2026-11-02T04:37:58+00:00 / 2026-11-02T04:38:19+00:00</td></tr>
+</tbody></table></div>
+<ul class="sources"><li><a href="https://github.com/Thox-ai/thoxinux-azure/blob/main/validation/portable-qemu/summary.json">summary.json</a> - Machine-readable result and exact scope.</li><li><a href="https://github.com/Thox-ai/thoxinux-azure/blob/main/validation/portable-qemu/harness-console.log">harness-console.log</a> - Full harness transcript.</li><li><a href="https://github.com/Thox-ai/thoxinux-azure/blob/main/validation/portable-qemu/serial.log">serial.log</a> - Complete serial output.</li><li><a href="https://github.com/Thox-ai/thoxinux-azure/blob/main/validation/portable-qemu/readback-validation.json">readback-validation.json</a> - Log-slice hash checks and process cleanup.</li><li><a href="https://github.com/Thox-ai/thoxinux/releases/tag/v0.9.1">Official kernel release v0.9.1</a> and <a href="https://github.com/Thox-ai/thoxinux/tree/fbad5952f20281ef6ad7eaefc1f54f7db4c0c6e9">pinned source revision</a>.</li></ul>
+<p class="guide">Document render of the November 1, 2026 CST local test; exact UTC timestamps remain in the proof. THOX document template 1.0.0 (2026-10-05 snapshot), original outlined corporate identity, installed Inter/system sans and JetBrains Mono/system mono fallbacks. This HTML includes no font files. The accompanying PDF retains normal embedded document font subsets. No scripts, tracking, forms or automatic external resources are included. Source links navigate only when activated.</p>
+</section></main></div>
+<footer class="document-footer"><p>ThoxInux Azure deployment resources<br>Recorded local QEMU evidence; Azure acceptance is separate.</p><p class="footer-slogan">Your AI. Your Data. Your Rules.™</p></footer>
+</body></html>

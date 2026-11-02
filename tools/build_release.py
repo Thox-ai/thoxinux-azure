@@ -27,19 +27,22 @@ ZIP_TIME = (1980, 1, 1, 0, 0, 0)
 
 REQUIRED_PATHS = (
     ".gitignore", ".gitattributes", "README.md", "LICENSE", "NOTICE", "UPSTREAM-NOTICE.md",
-    "CHANGELOG.md", "CONTRIBUTING.md", "SECURITY.md", "azuredeploy.json",
+    "CHANGELOG.md", "CONTRIBUTING.md", "SECURITY.md", "VERSION", "RELEASE_NOTES.md", "azuredeploy.json",
     "deploy.py", "build_cloud_init.py", "cloud-init.yaml",
     "docs/QUICKSTART.md", "docs/USER_GUIDE.md", "docs/ARCHITECTURE.md",
     "docs/VALIDATION.md", "docs/DEVELOPMENT.md", "docs/CLI_DEPLOYMENT.md",
-    "docs/PUBLISH.md", "docs/PACKAGING.md",
+    "docs/PUBLISH.md", "docs/PACKAGING.md", "docs/REPOSITORY_STANDARD.md",
+    "docs/PREVIEW.md", "docs/PREVIEW.html", "docs/PREVIEW.pdf",
+    "assets/kernel-verification.svg",
     "portal/README.md", "portal/azuredeploy.json", "portal/build_portal.py",
     "payload/run-vm.sh", "payload/guest_service.py", "payload/bootstrap.py",
     "payload/pins.json", "payload/GINUX_LICENSE", "payload/GINUX_NOTICE",
     "payload/thox-kernel", "payload/thoxinux.service",
     "tools/verify_kernel.py", "tools/publish_github.py", "tools/build_release.py",
+    "tools/create_release.py",
     "tests/test_bootstrap.py", "tests/test_deploy.py", "tests/test_guest.py",
     "tests/test_portal.py", "tests/test_publish_github.py",
-    "tests/test_verify_kernel.py", "tests/test_packaging.py",
+    "tests/test_verify_kernel.py", "tests/test_packaging.py", "tests/test_create_release.py",
     ".github/workflows/verify.yml",
     "validation/INDEPENDENT_REVIEW.md", "validation/SOURCE.json",
     "validation/STATUS.json", "validation/unit-tests.json", "validation/unit-tests.log",
@@ -58,12 +61,12 @@ OPTIONAL_PATHS = ("validation/README.md",) + tuple(
     for directory in ("local-qemu", "portable-qemu")
     for name in EVIDENCE_NAMES
 )
-PUBLIC_ROOTS = ("docs", "portal", "payload", "tools", "tests", "validation", ".github/workflows")
+PUBLIC_ROOTS = ("docs", "assets", "portal", "payload", "tools", "tests", "validation", ".github/workflows")
 EXECUTABLE_PATHS = {
     "deploy.py", "build_cloud_init.py", "portal/build_portal.py",
     "payload/run-vm.sh", "payload/guest_service.py", "payload/bootstrap.py",
     "payload/thox-kernel", "tools/verify_kernel.py", "tools/publish_github.py",
-    "tools/build_release.py",
+    "tools/build_release.py", "tools/create_release.py",
 }
 
 

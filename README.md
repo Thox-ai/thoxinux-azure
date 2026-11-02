@@ -3,15 +3,30 @@
 Your AI. Your Data. Your Rules.™
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Integration release](https://img.shields.io/github/v/release/Thox-ai/thoxinux-azure?include_prereleases&label=integration&color=05A451)](https://github.com/Thox-ai/thoxinux-azure/releases)
+[![Build and kernel verification](https://github.com/Thox-ai/thoxinux-azure/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/Thox-ai/thoxinux-azure/actions/workflows/verify.yml)
+[![Last commit](https://img.shields.io/github/last-commit/Thox-ai/thoxinux-azure?color=05A451)](https://github.com/Thox-ai/thoxinux-azure/commits/main)
+[![THOX.ai](https://img.shields.io/badge/THOX.ai-Kernel%20R%26D-05A451)](https://thox.ai)
+[![Host](https://img.shields.io/badge/Host-Ubuntu%2024.04%20AMD64-333333)](docs/ARCHITECTURE.md)
 [![Kernel: v0.9.1 engineering preview](https://img.shields.io/badge/Kernel-v0.9.1%20engineering%20preview-orange.svg)](https://github.com/Thox-ai/thoxinux/releases/tag/v0.9.1)
 
 Deploy an Azure VM that runs the real **ThoxInux kernel, the ThoxOS Core**, continuously inside an unprivileged QEMU guest. The deployment creates its infrastructure, installs the pinned release, starts the service, and checks the kernel before reporting success.
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FThox-ai%2Fthoxinux-azure%2Fmain%2Fportal%2Fazuredeploy.json)
 
-The button targets the intended public `Thox-ai/thoxinux-azure` repository. It becomes usable when this source is published there. If you received the prepared source package, follow [Publish the repository](docs/PUBLISH.md) first.
+The button loads this repository's public `main/portal/azuredeploy.json` into Azure's deployment form. Source publication must complete before that URL is available. For first publication or distribution to another repository, see the [publishing guide](docs/PUBLISH.md).
 
 **Engineering preview.** The real kernel has passed local boot, controller, lifecycle, recovery and clean-shutdown checks. Live Azure ARM validation, provisioning, cloud-init and systemd acceptance have not yet been recorded. A valid deployment button and local tests do not establish a successful Azure deployment. See [validation and limits](docs/VALIDATION.md).
+
+## Preview and release status
+
+![Actual local kernel verification rendered as a terminal transcript](assets/kernel-verification.svg)
+
+This is a rendering of the recorded local verifier output, not an Azure portal screenshot. The [complete preview](docs/PREVIEW.md) includes the [self-contained HTML](docs/PREVIEW.html), [two-page PDF](docs/PREVIEW.pdf), raw evidence, exact hashes and reproduction commands. No simulated desktop or full userspace is presented as working.
+
+The **integration release** badge tracks this deployment repository, including prereleases. The **kernel** badge identifies the separate upstream ThoxInux v0.9.1 payload. CI and last-commit badges read GitHub's actual state; unavailable or pending results must not be treated as passing.
+
+The first intended integration version is **v0.1.0-rc.1**, an engineering preview. The [release workflow](.github/workflows/verify.yml) runs verification before a separate release job can publish a formal GitHub prerelease. A version file alone is not a published release. Use the [Releases page](https://github.com/Thox-ai/thoxinux-azure/releases) and its attached evidence for the actual publication state.
 
 ## Deploy
 
@@ -94,8 +109,15 @@ python3 tools/verify_kernel.py --output /tmp/thoxinux-kernel-proof
 
 The output directory must be new. This boots the pinned real kernel twice and preserves evidence for eight controller checks, 22 domain lifecycle checks, persistent-state recovery and two clean shutdowns. It does not install a host service or provision Azure. The GitHub Actions workflow performs these same checks when enabled in the published repository.
 
+## Release contents and upgrades
+
+A verified integration prerelease includes the public source ZIP, its complete manifest and checksum, plus evidence produced by the actual CI kernel run. Release notes record changes, validation, limits and upgrade guidance. Existing tags and published assets are not overwritten. [RELEASE_NOTES.md](RELEASE_NOTES.md) describes the initial candidate and [the publishing guide](docs/PUBLISH.md) explains the gate.
+
+This initial release has no supported in-place upgrade procedure. For a changed kernel, host profile or bootstrap, create a new dedicated resource group and verify it before retiring the old environment. Preserve required guest data first. An existing CLI plan remains bound to its original files and parameters.
+
 ## Documentation
 
+- [Runtime preview: HTML, PDF and actual evidence](docs/PREVIEW.md)
 - [Quick start](docs/QUICKSTART.md)
 - [User guide and troubleshooting](docs/USER_GUIDE.md)
 - [Portal template details](portal/README.md)
@@ -103,7 +125,9 @@ The output directory must be new. This boots the pinned real kernel twice and pr
 - [Architecture and security boundaries](docs/ARCHITECTURE.md)
 - [Validation evidence and remaining acceptance](docs/VALIDATION.md)
 - [Development](docs/DEVELOPMENT.md)
-- [Publish the repository](docs/PUBLISH.md)
+- [Publish the repository and release](docs/PUBLISH.md)
+- [Public repository requirements and evidence](docs/REPOSITORY_STANDARD.md)
+- [Reproducible source packaging](docs/PACKAGING.md)
 
 ## License and governance
 
